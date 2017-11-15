@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="STEM_Careers.Views.PeoplePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="personCell">
+                <ViewCell>
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="5"
+                          Margin="0"
+                          Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="1*" />
+                            <RowDefinition Height="3*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*" />
+                            <ColumnDefinition Width="6*" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="3"
+                               Source="{Binding ImgReference}"
+                               Aspect="AspectFill" />
+                        <Label Grid.Row="0"
+                               Grid.Column="1"
+                               FontAttributes="Bold"
+                               FontSize="Medium"
+                               Text="{Binding Title}"
+                               LineBreakMode="WordWrap" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               FontAttributes="Italic"
+                               FontSize="Medium"
+                               Text="{Binding Name}"
+                               LineBreakMode="WordWrap" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               FontSize="Small"
+                               Text="{Binding Description}"
+                               LineBreakMode="WordWrap" />
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Even after a thourough search, nothing seems to match your selection.."
+                   IsVisible="{Binding NoResults}"
+                   IsEnabled="{Binding NoResults}"
+                   FontSize="Medium"
+                   FontAttributes="Italic"
+                   Margin="25"
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="{StaticResource SplitComplementVibrant}" />
+            <Button  IsVisible="{Binding NoResults}"
+                     IsEnabled="{Binding NoResults}"
+                     Text="Go back" 
+                     HorizontalOptions="Center"
+                     Clicked="Goback_Clicked"/>
+            <ListView x:Name="PeopleListView"
+                      ItemSelected="PeopleListView_ItemSelected"
+                      ItemsSource="{Binding Peeps}"
+                      HasUnevenRows="False"
+                      RowHeight="200"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                      CachingStrategy="RecycleElementAndDataTemplate"
+                      ItemTemplate="{StaticResource personCell}">
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

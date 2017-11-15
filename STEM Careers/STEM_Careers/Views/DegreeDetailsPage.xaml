@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="STEM_Careers.Views.DegreeDetailsPage"
+             Title="{Binding Degree.University}">
+    <ScrollView>
+        <StackLayout Spacing="5"
+                     Padding="15">
+            <Label Text="{Binding Degree.University}"
+                   FontSize="Large"
+                   FontAttributes="Bold" />
+            <Label Text="{Binding Degree.Name}"
+                   FontSize="Medium"
+                   FontAttributes="Bold" />
+            <StackLayout Orientation="Horizontal"
+                         Spacing="10">
+                <Label Text="QS World University Rank: "
+                       FontSize="Medium"
+                       FontAttributes="Bold" />
+                <Label Text="{Binding University.Rank}"
+                       FontSize="Medium"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource SplitComplementVibrant}" />
+            </StackLayout>
+
+
+            <Label Text="Description"
+                   FontSize="Medium"
+                   FontAttributes="Bold" />
+            <Label Text="{Binding University.Description}"
+                   FontSize="Small" />
+
+            <StackLayout Orientation="Horizontal"
+                         Padding="0"
+                         Spacing="0"
+                         HorizontalOptions="StartAndExpand">
+                <Button x:Name="linkButton"
+                        Text="Link to website"
+                        TextColor="CadetBlue"
+                        FontSize="Small"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        Clicked="OpenWebLink" />
+            </StackLayout>
+
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>

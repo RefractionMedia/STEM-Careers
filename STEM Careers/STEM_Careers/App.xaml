@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="STEM_Careers.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#0099CC</Color>
+            <Color x:Key="Complement">#CC3300</Color>
+            <Color x:Key="SplitComplementVibrant">#cc0033</Color>
+            <Color x:Key="SplitComplementSooth">#cc9900</Color>
+            <Color x:Key="MonochromaticDark">#0086b3</Color>
+            <Color x:Key="MonochromaticDarker">#007399</Color>
+            <Color x:Key="MonochromaticDarkest">#006080</Color>
+            <Color x:Key="MonochromaticLight">#00ACE6</Color>
+            <Color x:Key="MonochromaticLighter">#00BFFF</Color>
+            <Color x:Key="MonochromaticLightest">#1AC6FF</Color>
+
+            <Color x:Key="WebLink">#0000EE</Color>
+            <Color x:Key="FriendlyRed">#BF0A0A</Color>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="{StaticResource Primary}" />
+                <Setter Property="BarTextColor"
+                        Value="White" />
+            </Style>
+            <Style x:Key="TitleLabel"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource MonochromaticDarkest}" />
+            </Style>
+
+            <Style x:Key="DetailsLabel"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="Medium" />
+                <Setter Property="FontAttributes"
+                        Value="Italic" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource MonochromaticDarker}" />
+            </Style>
+            <Style x:Key="ClearTextLabel"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="Medium" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource MonochromaticDarkest}" />
+            </Style>
+
+            <Style x:Key="ButtonDefault"
+                   TargetType="Button">
+                <Setter Property="Margin"
+                        Value="2,2" />
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource Primary}" />
+                <Setter Property="TextColor"
+                        Value="White" />
+            </Style>
+
+            <Style x:Key="PlusLabel"
+                   TargetType="Label">
+                <Setter Property="Margin"
+                        Value="0" />
+                <Setter Property="FontSize"
+                        Value="Large" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource SplitComplementVibrant}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

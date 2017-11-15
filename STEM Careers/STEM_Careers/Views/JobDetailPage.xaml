@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="STEM_Careers.Views.JobDetailPage">
+    <ContentPage.Content>
+        <StackLayout Padding="15"
+                     Spacing="5">
+            <Label Text="{Binding selectedJob.Name}"
+                   Style="{StaticResource TitleLabel}" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Median Salary"
+                       Style="{StaticResource DetailsLabel}"/>
+                <Label Text="{Binding selectedJob.MedianSalary}"
+                       Style="{StaticResource DetailsLabel}"/>
+            </StackLayout>
+            <Label Text="{Binding selectedJob.Description}" 
+                   Style="{StaticResource ClearTextLabel}"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Padding="0"
+                         Spacing="0"
+                         HorizontalOptions="StartAndExpand">
+                <Button x:Name="jobsSearch"
+                        Text="Job Search"
+                        TextColor="CadetBlue"
+                        FontSize="Small"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        Clicked="OpenWebLink" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         Padding="0"
+                         Spacing="0"
+                         HorizontalOptions="StartAndExpand">
+                <Button x:Name="jobsInfo"
+                        Text="Job Info"
+                        TextColor="CadetBlue"
+                        FontSize="Small"
+                        BackgroundColor="Transparent"
+                        BorderColor="Transparent"
+                        Clicked="OpenWebLink" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

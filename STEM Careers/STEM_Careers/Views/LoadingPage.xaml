@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="STEM_Careers.Views.LoadingPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand"
+                     Spacing="15">
+            <Image Source="cws_logo_white.png"
+                   BackgroundColor="{StaticResource Primary}"
+                   Aspect="AspectFit" />
+            <ProgressBar x:Name="progressBar"
+                         HorizontalOptions="FillAndExpand"
+                         Progress="{Binding ProgressDouble}" />
+            <Label x:Name="commentLabel"
+                   Text=""
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <Button x:Name="RetryButton"
+                    Text="Retry"
+                    Clicked="RetryButton_Clicked"
+                    FontSize="Medium"
+                    HorizontalOptions="Center" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ValueConverters="clr-namespace:STEM_Careers.Converters"
+             x:Class="STEM_Careers.Views.HomePage"
+             Title="Career Finder">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ValueConverters:BooleanNegationConverter x:Key="not" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView x:Name="_scrollView"
+                IsVisible="{Binding IsBusy, Converter={StaticResource not}"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+        <StackLayout>
+            <Image Source="cws_logo_white.png"
+                   BackgroundColor="{StaticResource Primary}"
+                   Aspect="AspectFit" />
+            <StackLayout Orientation="Vertical"
+                         Padding="16,0,16,40"
+                         Spacing="5">
+                <Label x:Name="NoInternetLabel"
+                       Text="Please turn internet on for the app to work"
+                       TextColor="DarkRed"
+                       FontAttributes="Bold"
+                       FontSize="Large"
+                       IsVisible="False" />
+                <Button x:Name="FindPathButton"
+                        Style="{StaticResource ButtonDefault}"
+                        Text="Degree Search"
+                        Clicked="DegreePicker" />
+                <Button x:Name="FeaturedButton"
+                        Style="{StaticResource ButtonDefault}"
+                        Text="Featured Stories"
+                        Clicked="Featured" />
+                <Button x:Name="CareerInspoButton"
+                        Style="{StaticResource ButtonDefault}"
+                        Text="Career Inspo"
+                        Clicked="CareerInspo" />
+                <Button x:Name="PeopleButton"
+                        Style="{StaticResource ButtonDefault}"
+                        Text="People"
+                        Clicked="People" />
+            </StackLayout>
+        </StackLayout>
+
+    </ScrollView>
+</ContentPage>
