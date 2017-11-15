@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>STEM_Careers</string>
+	<string>STEM Careers</string>
 	<key>CFBundleName</key>
 	<string>STEM_Careers</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.STEM_Careers</string>
+	<string>com.refractionmedia.STEMCareers</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -43,6 +43,8 @@
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false />
+	<false/>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>
