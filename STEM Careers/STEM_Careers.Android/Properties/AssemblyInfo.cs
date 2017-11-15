@@ -2,6 +2,11 @@
 using System.Runtime.CompilerServices;
 using Android.App;
 
+#if DEBUG
+[assembly: Application(Debuggable = true, Icon = "@drawable/app_icon")]
+#else
+[assembly: Application(Debuggable=false, Icon = "@drawable/app_icon")]
+#endif
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 
