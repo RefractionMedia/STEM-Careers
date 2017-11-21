@@ -235,6 +235,8 @@ namespace STEM_Careers.Helpers
 
         public async Task<List<People>> GetPeople(string field = "", string X = "")
         {
+            if (!App.HasInternetConnexion())
+                return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
             if (await UpToDate() == true)
                 return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
             return await await UpdatePeople(field, X).ContinueWith(async (t) =>

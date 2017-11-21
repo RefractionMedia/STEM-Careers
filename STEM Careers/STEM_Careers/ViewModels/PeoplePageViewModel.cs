@@ -62,6 +62,7 @@ namespace STEM_Careers.ViewModels
                 IsBusy = false;
                 return t.Result;
             }));
+            IsBusy = false;
         }
     }
 }
