@@ -13,7 +13,7 @@ namespace STEM_Careers.Helpers
     {
 
         static readonly string UniversityRankingCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6gv1dYQLy6RmQnC3WgQBRzmmJVgG65FeIVX65pA8gc1rN0bzmneNrv3UPlV1vtSsST2l0MDjIEnaC/pub?output=csv";
-        static readonly string DegreeFinderCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8OCM47AjOpEEp9Qgg-NSh36GDuYUsvShr95RKNLG6HH4GcBq7qZkgWLoHbJn5gPYhiJArfmUNgygX/pub?output=csv";
+        static readonly string DegreeFinderCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR6F5zziuTvzOR2b6032jBCNGp0LTf_a1L2hMxi000afILLr90atnytTNhyRgAec2yzQ3ht9SLLUsJ3/pub?output=csv";
         static readonly string JobListCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOkra4mxnp_E0RGSVbdf923UYLTqtbqnlv4Ob2kPP1jpJ9qn4fGWL4sy5NywRHcHoAZpVgYwOm0EyC/pub?output=csv";
         static readonly string JobsDescriptionsCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKzU-TIFvaSEIjMQUky556BIMtNeJX53oQRgN8E8-aSIQr0Hnl6Qut0078xd7F29aAEQFqJZ-kJeTI/pub?output=csv";
 
@@ -218,6 +218,5 @@ namespace STEM_Careers.Helpers
             var insertionReturn = db.InsertAllAsync(Degrees);
             return true;
         }
-
     }
 }

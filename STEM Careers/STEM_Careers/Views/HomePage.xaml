@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ValueConverters="clr-namespace:STEM_Careers.Converters"
              x:Class="STEM_Careers.Views.HomePage"
-             Title="Career Finder">
+             Title="Home">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ValueConverters:BooleanNegationConverter x:Key="not" />

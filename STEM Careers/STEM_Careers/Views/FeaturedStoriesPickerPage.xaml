@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="STEM_Careers.Views.FeaturedStoriesPickerPage">
+             x:Class="STEM_Careers.Views.FeaturedStoriesPickerPage"
+             Title="Take your pick">
     <ContentPage.Content>
         <ScrollView VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand">

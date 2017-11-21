@@ -35,7 +35,7 @@ namespace STEM_Careers.Views.MainPage
                 {
                     new MainPageMenuItem { Id = 0, Title = "Home" , TargetType=typeof(HomePage)},
                     new MainPageMenuItem { Id = 1, Title = "Degrees" , TargetType=typeof(DegreeSearchPage)},
-                    new MainPageMenuItem { Id = 2, Title = "People" , TargetType=typeof(PeoplePickPage)},
+                    new MainPageMenuItem { Id = 2, Title = "Items" , TargetType=typeof(ItemsPage)},
                     new MainPageMenuItem { Id = 3, Title = "Jobs" , TargetType=typeof(JobPickPage)},
                     new MainPageMenuItem { Id = 4, Title = "About", TargetType=typeof(AboutPage) },
                 });

@@ -41,7 +41,7 @@
     <Compile Include="Converters\BooleanNegationConverter.cs" />
     <Compile Include="Converters\ClearTextFormater.cs" />
     <Compile Include="Converters\SearchQueryCreator.cs" />
-    <Compile Include="Data\DegreeDatabase.cs" />
+    <Compile Include="Data\Database.cs" />
     <Compile Include="Data\IFileHelper.cs" />
     <Compile Include="Helpers\CsvCenter.cs" />
     <Compile Include="Helpers\CwSTEMapi.cs" />
@@ -49,7 +49,7 @@
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
     <Compile Include="Helpers\ObservableRangeCollection.cs" />
-    <Compile Include="Helpers\WebContentHelper.cs" />
+    <Compile Include="Helpers\PeopleHelper.cs" />
     <Compile Include="Models\BaseDataObject.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Degree.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="ViewModels\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\ItemsViewModel.cs" />
     <Compile Include="ViewModels\JobsViewModel.cs" />
-    <Compile Include="ViewModels\PeopleDetailViewModel.cs" />
     <Compile Include="ViewModels\PeoplePageViewModel.cs" />
     <Compile Include="ViewModels\STEMPickerViewModel.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">

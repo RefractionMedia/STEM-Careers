@@ -39,62 +39,29 @@ namespace STEM_Careers.ViewModels
             Title = "People";
             NoResults = false;
             Peeps = new ObservableRangeCollection<People>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
 
         public async Task Initialize()
         {
             IsBusy = true;
-            MessagingCenter.Subscribe<WebContentHelper>(this, "All pages retrieved", (sender) =>
+            MessagingCenter.Subscribe<PeopleHelper>(this, "All pages retrieved", (sender) =>
             {
                 IsBusy = false;
                 if (Peeps.Count == 0)
                     NoResults = true;
             });
-            MessagingCenter.Subscribe<WebContentHelper, People>(this, "AddPerson",  (helper, person) =>
-            {
-                if(!Peeps.Contains(person))
-                    Peeps.Add(person);
-            });
-            WebContentHelper webContentHelper = new WebContentHelper();
-            await webContentHelper.FetchPeopleArticles(this.field, this.X);
-
-        }
-
-        async Task ExecuteLoadItemsCommand(People person = null)
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                if (!Peeps.Contains(person))
-                {
-                    List<People> items = new List<People>();
-                    foreach (var item in Peeps)
-                    {
-                        items.Add(item);
-                    }
-                    Peeps.ReplaceRange(items);
-                }
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-                MessagingCenter.Send(new MessagingCenterAlert
-                {
-                    Title = "Error",
-                    Message = "Unable to load items.",
-                    Cancel = "OK"
-                }, "message");
-            }
-            finally
+            //MessagingCenter.Subscribe<PeopleHelper, People>(this, "AddPerson", (helper, person) =>
+            //{
+            //    if (!Peeps.Contains(person))
+            //        Peeps.Add(person);
+            //});
+            PeopleHelper helper = new PeopleHelper();
+            Peeps.AddRange(await helper.GetPeople(this.field, this.X).ContinueWith(t=>
             {
                 IsBusy = false;
-            }
+                return t.Result;
+            }));
         }
     }
 }

@@ -21,19 +21,23 @@ namespace STEM_Careers.Views
             }
             BindingContext = vm;
             vm.Initialize();
+            string title = field == "" ? "Any" : field;
+            title += "\n+\n";
+            title += X == "" ? "Any" : X;
+            Title = title;
         }
 
-        private void PeopleListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async Task PeopleListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (sender is ListView)
             {
                 ListView listView = sender as ListView;
                 People person = listView.SelectedItem as People;
                 listView.SelectedItem = null;
-                if (person != null)
-                    Navigation.PushAsync(new WebViewPage(person.Href));
+                //if (person != null)
+                //    await Navigation.PushAsync(new WebViewPage(person.Href));
                 //for later on if time allows it
-                //await Navigation.PushAsync(new PeopleDetailPage(person));
+                await Navigation.PushAsync(new PeopleDetailPage(person));
             }
         }
 

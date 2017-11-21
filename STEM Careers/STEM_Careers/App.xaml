@@ -70,7 +70,7 @@
                 <Setter Property="HorizontalOptions"
                         Value="CenterAndExpand" />
                 <Setter Property="TextColor"
-                        Value="{StaticResource SplitComplementVibrant}" />
+                        Value="{StaticResource Primary}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

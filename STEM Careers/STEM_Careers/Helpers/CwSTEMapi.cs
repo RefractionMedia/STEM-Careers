@@ -30,7 +30,6 @@ namespace STEM_Careers.Helpers
             client.DefaultRequestHeaders.Clear();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             Categories = new List<Category>();
-
         }
 
         internal async Task GetCategories()

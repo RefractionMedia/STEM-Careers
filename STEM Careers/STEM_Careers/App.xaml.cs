@@ -10,18 +10,18 @@ namespace STEM_Careers
 {
     public partial class App : Application
     {
-        public static bool UseMockDataStore = true;
+        public static bool UseMockDataStore = false;
         public static string AzureMobileAppUrl = "https://[CONFIGURE-THIS-URL].azurewebsites.net";
 
         //Database 
-        static DegreeDatabase database;
-        public static DegreeDatabase Database
+        static Database database;
+        public static Database Database
         {
             get
             {
                 if (database == null)
                 {
-                    database = new DegreeDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("DegreeDatabase.db"));
+                    database = new Database(DependencyService.Get<IFileHelper>().GetLocalFilePath("Database.db"));
                 }
                 return database;
             }
@@ -42,7 +42,7 @@ namespace STEM_Careers
             set { }
         }
 
-        static internal WebContentHelper webHelper = new WebContentHelper();
+        static internal PeopleHelper webHelper = new PeopleHelper();
 
         #region PickerIndexes Functions and variables
         //These properties are to use the Properties Dictionnary in the app (saves values of selected picker when navigating through pages)

@@ -56,7 +56,7 @@ namespace STEM_Careers.Views
             });
 
             
-            MessagingCenter.Subscribe<DegreeDatabase, string>(this, "DatabaseInfo", (sender, str) =>
+            MessagingCenter.Subscribe<Database, string>(this, "DatabaseInfo", (sender, str) =>
             {
                 if (!App.HasInternetConnexion() && !App.Database.IsInitialized())
                 {
@@ -82,30 +82,18 @@ namespace STEM_Careers.Views
                         ProgressDouble = 0.20;
                         break;
                     case "Tables created":
-                        commentLabel.Text = "Heating engines up";
-                        ProgressDouble = 0.33;
-                        break;
-                    case "UniTask Done":
-                        commentLabel.Text = "Rockets attached";
-                        ProgressDouble += 0.20;
-                        break;
-                    case "DegreeTask Done":
-                        commentLabel.Text = "Vortex cells warmed up";
-                        ProgressDouble += 0.20;
-                        break;
-                    case "JobTask Done":
-                        commentLabel.Text = "Space fuel tank full";
-                        ProgressDouble += 0.20;
+                        commentLabel.Text = "Downloading degrees";
+                        ProgressDouble = 0.66;
                         break;
                     case "Initialized":
                         ProgressDouble = 1.0;
-                        commentLabel.Text = "Let us begin";
+                        commentLabel.Text = "Ready";
                         AnimateToHomeScreen();
                         break;
                     case "Initialization error":
                         RetryButton.IsVisible = true;
                         RetryButton.IsEnabled = true;
-                        commentLabel.Text = "Something went wrong..";
+                        commentLabel.Text = "Something went wrong.. Please retry";
                         commentLabel.TextColor = Color.Red;
                         break;
                 }
@@ -123,7 +111,7 @@ namespace STEM_Careers.Views
 
         private async Task UpdateBar()
         {
-            await progressBar.ProgressTo(ProgressDouble, 1000, Easing.CubicInOut);
+            await progressBar.ProgressTo(ProgressDouble, 4000, Easing.CubicInOut);
         }
 
         private async Task AnimateToHomeScreen()

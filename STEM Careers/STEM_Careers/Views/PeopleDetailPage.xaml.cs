@@ -14,18 +14,14 @@ namespace STEM_Careers.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PeopleDetailPage : ContentPage
     {
-        PeopleDetailViewModel vm;
+        People person;
 
         public PeopleDetailPage(People person)
         {
             InitializeComponent();
             if (person == null)
                 Navigation.PopAsync();
-
-            if (vm == null)
-                vm = new PeopleDetailViewModel();
-            BindingContext = vm;
-            vm.Initialize(person);
+            BindingContext = person;
         }
     }
 }
