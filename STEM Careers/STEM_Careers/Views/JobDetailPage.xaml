@@ -21,11 +21,8 @@
                          Spacing="0"
                          HorizontalOptions="StartAndExpand">
                 <Button x:Name="jobsSearch"
-                        Text="Job Search"
-                        TextColor="CadetBlue"
-                        FontSize="Small"
-                        BackgroundColor="Transparent"
-                        BorderColor="Transparent"
+                        Text="Google search: that job in Australia"
+                        Style="{StaticResource ButtonOutsideLink}"
                         Clicked="OpenWebLink" />
             </StackLayout>
             <StackLayout Orientation="Horizontal"
@@ -33,11 +30,8 @@
                          Spacing="0"
                          HorizontalOptions="StartAndExpand">
                 <Button x:Name="jobsInfo"
-                        Text="Job Info"
-                        TextColor="CadetBlue"
-                        FontSize="Small"
-                        BackgroundColor="Transparent"
-                        BorderColor="Transparent"
+                        Text="Google search : job information"
+                        Style="{StaticResource ButtonOutsideLink}"
                         Clicked="OpenWebLink" />
             </StackLayout>
         </StackLayout>

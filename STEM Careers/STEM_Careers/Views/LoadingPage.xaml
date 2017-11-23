@@ -24,6 +24,12 @@
                     FontSize="Medium"
                     HorizontalOptions="Center" />
 
+            <Label x:Name="disclaimerLabel"
+                   Margin="10"
+                   Text="This first step only happens at first launch, please make sure you have good internet connection for this may take a minute or two"
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

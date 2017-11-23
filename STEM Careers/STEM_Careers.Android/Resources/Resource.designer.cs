@@ -34,6 +34,7 @@ namespace STEM_Careers.Droid
 			global::Xamarin.Auth._MobileServices.Resource.String.ApplicationName = global::STEM_Careers.Droid.Resource.String.ApplicationName;
 			global::Xamarin.Auth._MobileServices.Resource.String.Hello = global::STEM_Careers.Droid.Resource.String.Hello;
 			global::Xamarin.Auth._MobileServices.Resource.String.title_activity_webview = global::STEM_Careers.Droid.Resource.String.title_activity_webview;
+			global::ModernHttpClient.Resource.String.library_name = global::STEM_Careers.Droid.Resource.String.library_name;
 			global::PCLCrypto.Resource.String.ApplicationName = global::STEM_Careers.Droid.Resource.String.ApplicationName;
 			global::PCLCrypto.Resource.String.Hello = global::STEM_Careers.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::STEM_Careers.Droid.Resource.Attribute.actionBarSize;
@@ -4058,8 +4059,8 @@ namespace STEM_Careers.Droid
 			// aapt resource value: 0x7f090027
 			public const int abc_toolbar_collapse_description = 2131296295;
 			
-			// aapt resource value: 0x7f090041
-			public const int app_name = 2131296321;
+			// aapt resource value: 0x7f090042
+			public const int app_name = 2131296322;
 			
 			// aapt resource value: 0x7f090036
 			public const int appbar_scrolling_view_behavior = 2131296310;
@@ -4069,6 +4070,9 @@ namespace STEM_Careers.Droid
 			
 			// aapt resource value: 0x7f090038
 			public const int character_counter_pattern = 2131296312;
+			
+			// aapt resource value: 0x7f090040
+			public const int library_name = 2131296320;
 			
 			// aapt resource value: 0x7f090000
 			public const int mr_button_content_description = 2131296256;
@@ -4154,8 +4158,8 @@ namespace STEM_Careers.Droid
 			// aapt resource value: 0x7f090029
 			public const int status_bar_notification_info_overflow = 2131296297;
 			
-			// aapt resource value: 0x7f090040
-			public const int title_activity_webview = 2131296320;
+			// aapt resource value: 0x7f090041
+			public const int title_activity_webview = 2131296321;
 			
 			static String()
 			{

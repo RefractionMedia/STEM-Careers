@@ -36,10 +36,7 @@
                          HorizontalOptions="StartAndExpand">
                 <Button x:Name="linkButton"
                         Text="Link to website"
-                        TextColor="CadetBlue"
-                        FontSize="Small"
-                        BackgroundColor="Transparent"
-                        BorderColor="Transparent"
+                        Style="{StaticResource ButtonOutsideLink}"
                         Clicked="OpenWebLink" />
             </StackLayout>
 

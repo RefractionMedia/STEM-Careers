@@ -23,6 +23,25 @@ namespace STEM_Careers.Helpers
             client = new HttpClient();
         }
 
+        /// <summary>
+        /// Queries the Database for stored People
+        /// </summary>
+        /// <param name="field"></param>
+        /// <param name="X"></param>
+        /// <returns></returns>
+        public async Task<List<People>> GetPeople(string field = "", string X = "")
+        {
+            return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
+        }
+
+
+        /// <summary>
+        /// Gets the additional data of a person, then adds sends an "AddPerson" message
+        /// The "AddPerson" message is caught by the Database and added to it, also by the PeoplePage and added to the list currently on display
+        /// </summary>
+        /// <see cref="PeopleFromHtml(string, string, string)"/>
+        /// <param name="person"></param>
+        /// <returns></returns>
         public async Task GetPersonDetails(People person)
         {
             if (person == null)
@@ -56,9 +75,15 @@ namespace STEM_Careers.Helpers
             return;
         }
 
+        /// <summary>
+        /// Gets basic People data (href, title, name..) from an html string, then calls GetPersonDetails(..) for detailed info
+        /// </summary>
+        /// <param name="html">the Html page as a string (has to be a list of profiles page)</param>
+        /// <param name="X"></param>
+        /// <param name="field"></param>
+        /// <returns></returns>
         private async Task PeopleFromHtml(string html, string X = "", string field = "")
         {
-            List<People> items = new List<People>();
             var page = new HtmlDocument();
             page.LoadHtml(html);
 
@@ -66,6 +91,19 @@ namespace STEM_Careers.Helpers
             var articles = firstArticle.ParentNode.Descendants();
             foreach (var article in articles)
             {
+                int ID = 0;
+                try
+                {
+                    ID = Int32.Parse(article.Id.Remove(0, 5));
+                }
+                catch (Exception e)
+                {
+                    e.ToString();
+                }
+                //if (await App.Database.GetHighestPeopleID() > ID)
+                //{
+                //    return;
+                //}
                 //Non articles are skipped
                 if (!article.Name.Equals("article"))
                     continue;
@@ -112,15 +150,6 @@ namespace STEM_Careers.Helpers
                 var sectionH4 = section.Descendants().FirstOrDefault(x => x.Name == "h4");
                 var tmp = sectionH4.NextSibling.InnerText;
                 tmp = tmp.Trim();
-                int ID = 0;
-                try
-                {
-                    ID = Int32.Parse(article.Id.Remove(0, 5));
-                }
-                catch (Exception e)
-                {
-                    e.ToString();
-                }
                 //creating the person and sending it to the PeoplePageViewodel through messaging center
                 People person = new People
                 {
@@ -137,7 +166,7 @@ namespace STEM_Careers.Helpers
         }
 
         /// <summary>
-        /// Loops on every people page on the website untill it gets a 404, parses people out from html
+        /// Gets all Poeple articles on "careerswithstem.com/profiles/page/*" untill 404 code
         /// </summary>
         /// <param name="field"></param>
         /// <param name="X"></param>
@@ -161,7 +190,6 @@ namespace STEM_Careers.Helpers
                                 return;
                             }
                             notFound = true;
-                            MessagingCenter.Send<PeopleHelper>(this, "All pages retrieved");
                             return;
                         }
 
@@ -185,80 +213,18 @@ namespace STEM_Careers.Helpers
         }
 
 
+        #region Updating helpers
         public async Task UpdatePeople(string field = "", string X = "")
         {
-            try
-            {
-                var uri = new Uri("https://careerswithstem.com/profiles/");
-                await client.GetAsync(uri).ContinueWith((t) =>
-                {
-                    t.Result.EnsureSuccessStatusCode();
-                    t.Result.Content.ReadAsStringAsync().ContinueWith(async (readtask) =>
-                    {
-                        try
-                        {
-                            var page = new HtmlDocument();
-                            page.LoadHtml(readtask.Result);
-
-                            var nextPageListItem = page.DocumentNode.Descendants().Where(node => node.Name == "a"
-                           && node.Attributes["class"].Value.Contains("next")
-                           && node.Attributes["class"].Value.Contains("page-numbers")).FirstOrDefault();
-
-                            //we count the number of pages, multiplied by 12 (number of articles per page)
-                            int totalPeople = 12 * Int32.Parse(nextPageListItem.InnerText);
-                            int count = await App.Database.GetPeopleCount();
-                            if (count >= totalPeople)
-                            {
-                                await PeopleFromHtml(readtask.Result, X, field);
-                                return;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            await FetchPeopleArticles(field, X);
-                            return;
-                        }
-                    });
-                });
-
-            }
-            catch (HttpRequestException httpEx)
-            {
-                httpEx.ToString();
-            }
-            catch (Exception e)
-            {
-                e.ToString();
-            }
+            if (await PeopleUpToDate())
+                return;
+            await FetchPeopleArticles(field, X);
             return;
         }
 
-        public async Task<List<People>> GetPeople(string field = "", string X = "")
+        public async Task<bool> PeopleUpToDate()
         {
-            if (!App.HasInternetConnexion())
-                return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
-            if (await UpToDate() == true)
-                return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
-            return await await UpdatePeople(field, X).ContinueWith(async (t) =>
-             {
-                 if (t.Exception == null)
-                 {
-                     return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
-                 }
-                 else
-                 {
-                     return await await FetchPeopleArticles(field, X).ContinueWith(async (Task)=>
-                     {
-                         return await App.Database.GetPeople(ConvertCategory(field), ConvertCategory(X));
-                     });
-                 }
-             });
-
-        }
-
-        public async Task<bool> UpToDate()
-        {
-            //check if the article is older than the newest one in the database
+            //check if the newest article on website is the same as the newest one in the database
             int ID = 0;
             var uri = new Uri("https://careerswithstem.com/profiles/");
             return await await await client.GetAsync(uri).ContinueWith(async (t) =>
@@ -277,8 +243,14 @@ namespace STEM_Careers.Helpers
                 });
             });
         }
-
-        //The mapper for our Xs and Fields
+        #endregion
+        #region Category helpers
+        /// <summary>
+        /// Checks if str is part of categories (with name to slug conversion)
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="categories"></param>
+        /// <returns></returns>
         public bool CheckInList(string str, List<string> categories)
         {
             switch (str)
@@ -290,11 +262,11 @@ namespace STEM_Careers.Helpers
                         return true;
                     break;
                 case "Be creative":
-                    if (categories.Contains("creators") || categories.Contains("creative-careers"))
+                    if (categories.Contains("creative-careers"))
                         return true;
                     break;
                 case "Build healthy communities":
-                    if (categories.Contains("health") || categories.Contains("healers"))
+                    if (categories.Contains("health"))
                         return true;
                     break;
                 case "Create social change":
@@ -329,8 +301,8 @@ namespace STEM_Careers.Helpers
                     if (categories.Contains("engineering"))
                         return true;
                     break;
-                case "Technology":
-                    if (categories.Contains("technology") | categories.Contains("code"))
+                case "Computer Science":
+                    if (categories.Contains("code"))
                         return true;
                     break;
                 default:
@@ -339,6 +311,11 @@ namespace STEM_Careers.Helpers
             return false;
         }
 
+        /// <summary>
+        /// Converts a category name to it's slug (for DB purposes)
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         public string ConvertCategory(string str)
         {
             switch (str)
@@ -348,9 +325,9 @@ namespace STEM_Careers.Helpers
                 case "Build a smarter future":
                     return "build-smarter-future";
                 case "Be creative":
-                    return "creat";
+                    return "creative-careers";
                 case "Build healthy communities":
-                    return "heal";
+                    return "health";
                 case "Create social change":
                     return "social";
                 case "Get immediate skills":
@@ -362,17 +339,19 @@ namespace STEM_Careers.Helpers
                 case "Start a business":
                     return "business";
                 case "Maths":
-                    return "math";
+                    return "maths";
                 case "Science":
                     return "science";
                 case "Engineering":
                     return "engineering";
-                case "Technology":
+                case "Computer Science":
                     return "code";
                 default:
                     break;
             }
             return "";
         }
+
+        #endregion
     }
 }

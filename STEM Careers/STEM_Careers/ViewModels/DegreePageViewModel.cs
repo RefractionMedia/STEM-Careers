@@ -21,7 +21,13 @@ namespace STEM_Careers.ViewModels
             this.field = field;
             this.state = state;
             this.X = X;
-            Title = "Results";
+            string title = "Degrees: ";
+            title += field == "" ? "Any" : field;
+            title += " + ";
+            title += X == "" ? "Any" : X;
+            title += " + ";
+            title += state == "" ? "Any" : state;
+            Title = title;
             Degrees = new ObservableRangeCollection<Degree>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(field, X, state));
         }

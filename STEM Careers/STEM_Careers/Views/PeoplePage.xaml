@@ -62,6 +62,9 @@
                      HorizontalOptions="Center"
                      Clicked="Goback_Clicked"/>
             <ListView x:Name="PeopleListView"
+                      IsPullToRefreshEnabled="True"
+                      Refreshing="PeopleListView_Refreshing"
+                      RefreshCommand=""
                       ItemSelected="PeopleListView_ItemSelected"
                       ItemsSource="{Binding Peeps}"
                       HasUnevenRows="False"

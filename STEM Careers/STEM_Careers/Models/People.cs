@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System;
 using System.Collections.Generic;
 
 namespace STEM_Careers.Models
@@ -14,5 +15,15 @@ namespace STEM_Careers.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Content { get; internal set; }
+    }
+
+    class PeopleComparer : Comparer<People>
+    {
+        private static readonly PeopleComparer _instance = new PeopleComparer();
+        public static PeopleComparer Instance { get { return _instance; } }
+        public override int Compare(People x, People y)
+        {
+            return x.ArticleID.CompareTo(y.ArticleID);
+        }
     }
 }

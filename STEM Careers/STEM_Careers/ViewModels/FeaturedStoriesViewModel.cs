@@ -30,10 +30,6 @@ namespace STEM_Careers.ViewModels
             IsBusy = true;
             try
             {
-                if(Field.Contains("Technology"))
-                {
-                    Field = "Code";
-                }
                 IEnumerable<Category> Xcats = from cat in App.Api.Categories where cat.Name.Equals(X, StringComparison.CurrentCultureIgnoreCase) select cat;
                 var list = Xcats.ToList();
                 Category Xcat = list.FirstOrDefault();

@@ -5,8 +5,9 @@
              Title="{Binding Name}">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <StackLayout Orientation="Horizontal">
+            <StackLayout Margin="10">
+                <StackLayout Orientation="Horizontal"
+                            >
                     <Image Source="{Binding ImgReference}"
                            Aspect="AspectFit"
                            HorizontalOptions="StartAndExpand" />

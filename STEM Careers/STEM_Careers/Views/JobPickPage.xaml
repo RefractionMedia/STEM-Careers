@@ -25,7 +25,7 @@
                        Style="{StaticResource PlusLabel}" />
 
                 <Picker x:Name="XPicker"
-                        Title="Select your X"
+                        Title="Select your X Factor"
                         SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding YourX}">
                 </Picker>

@@ -53,10 +53,23 @@
                    TargetType="Button">
                 <Setter Property="Margin"
                         Value="2,2" />
+                
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource Primary}" />
                 <Setter Property="TextColor"
                         Value="White" />
+            </Style>
+
+            <Style x:Key="ButtonOutsideLink"
+                   TargetType="Button">
+                <Setter Property="Margin"
+                        Value="2,2" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="TextColor"
+                        Value="CadetBlue" />
+                <Setter Property="BorderColor"
+                        Value="Transparent" />
             </Style>
 
             <Style x:Key="PlusLabel"

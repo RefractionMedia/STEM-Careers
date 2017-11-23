@@ -111,12 +111,22 @@ namespace STEM_Careers.Helpers
                 {
                     string jobName = csv.GetField(0).Trim();
                     string jobDescription = string.IsNullOrWhiteSpace(csv.GetField(1))? "No description, yet" : csv.GetField(1);
-                    Job job = await db.Table<Job>().Where(j => j.Name.ToLower() == jobName.ToLower()).FirstOrDefaultAsync();
-                    if (job != null)
+                    List<Job> jobs = await db.Table<Job>().Where(j => j.Name.ToLower() == jobName.ToLower()).ToListAsync();
+                    if (jobs != null)
                     {
-                        job.Description = jobDescription;
-                        await db.UpdateAsync(job);
+                        foreach (Job job in jobs)
+                        {
+                            job.Description = jobDescription;
+                        }
                     }
+                    else
+                    {
+                        foreach (Job job in jobs)
+                        {
+                            job.Description = "Sorry, no description yet..";
+                        }
+                    }
+                    await db.UpdateAllAsync(jobs);
                 }
                 catch (Exception e)
                 {

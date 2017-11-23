@@ -21,7 +21,9 @@ namespace STEM_Careers.Views
             }
             BindingContext = vm;
             vm.Initialize();
-            string title = field == "" ? "Any" : field;
+
+            string title = "People: ";
+            title = field == "" ? "Any" : field;
             title += "\n+\n";
             title += X == "" ? "Any" : X;
             Title = title;
@@ -44,6 +46,14 @@ namespace STEM_Careers.Views
         private void Goback_Clicked(object sender, EventArgs e)
         {
             Navigation.PopAsync();
+        }
+
+        private async Task PeopleListView_Refreshing(object sender, EventArgs e)
+        {
+            if (!vm.IsBusy)
+            {
+                vm.Update();
+            }
         }
     }
 }

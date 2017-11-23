@@ -129,8 +129,11 @@ namespace STEM_Careers.Data
                         PeopleTableInitialized = await await  database.CreateTableAsync<People>().ContinueWith(async (t) =>
                         {
                             PeopleHelper peopleHelper = new PeopleHelper();
-                            await peopleHelper.FetchPeopleArticles();
-                            return true;
+                            return await peopleHelper.FetchPeopleArticles().ContinueWith( (task)=> {
+                                if (!t.IsFaulted)
+                                    return true;
+                                return false;
+                            });
                         });
                     }catch(Exception e)
                     {

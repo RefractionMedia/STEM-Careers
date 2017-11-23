@@ -15,8 +15,13 @@ namespace STEM_Careers.Views
         public JobsPage(string field = "", string X = "")
         {
             InitializeComponent();
-
             BindingContext = vm = new JobsViewModel(field, X);
+
+            string title = "Jobs: ";
+            title += field == "" ? "Any" : field;
+            title += " + ";
+            title += X == "" ? "Any" : X;
+            Title = title;
         }
 
        

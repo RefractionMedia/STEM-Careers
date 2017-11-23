@@ -14,8 +14,6 @@ namespace STEM_Careers.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PeopleDetailPage : ContentPage
     {
-        People person;
-
         public PeopleDetailPage(People person)
         {
             InitializeComponent();

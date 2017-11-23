@@ -10,7 +10,9 @@ namespace STEM_Careers
 {
     public partial class App : Application
     {
-        public static bool UseMockDataStore = false;
+        public static bool UseMock
+            
+            = false;
         public static string AzureMobileAppUrl = "https://[CONFIGURE-THIS-URL].azurewebsites.net";
 
         //Database 
@@ -101,17 +103,6 @@ namespace STEM_Careers
         public App()
         {
             InitializeComponent();
-
-            if (UseMockDataStore)
-                DependencyService.Register<MockDataStore>();
-            else
-                DependencyService.Register<AzureDataStore>();
-
-            //if (Device.RuntimePlatform == Device.iOS)
-            //    MainPage = new MainPage();
-            //else
-            //    MainPage = new NavigationPage(new MainPage());
-
             Api.GetCategories();
             MainPage = new LoadingPage();
             InitializePickers();

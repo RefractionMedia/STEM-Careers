@@ -28,19 +28,15 @@
                        IsVisible="False" />
                 <Button x:Name="FindPathButton"
                         Style="{StaticResource ButtonDefault}"
-                        Text="Degree Search"
+                        Text="Search Degrees"
                         Clicked="DegreePicker" />
-                <Button x:Name="FeaturedButton"
-                        Style="{StaticResource ButtonDefault}"
-                        Text="Featured Stories"
-                        Clicked="Featured" />
                 <Button x:Name="CareerInspoButton"
                         Style="{StaticResource ButtonDefault}"
-                        Text="Career Inspo"
+                        Text="Find Career Inspo"
                         Clicked="CareerInspo" />
                 <Button x:Name="PeopleButton"
                         Style="{StaticResource ButtonDefault}"
-                        Text="People"
+                        Text="Meet People"
                         Clicked="People" />
             </StackLayout>
         </StackLayout>

@@ -15,17 +15,16 @@
                        Text="Who interests you?"
                        Margin="0,33,0,10"
                        FontAttributes="Bold" />
-               
+
                 <Picker x:Name="subjectPicker"
-                        Title="Working in"
+                        Title="Choose a Discipline"
                         SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding Fields}">
                 </Picker>
-
                 <Label Text="+"
                        Style="{StaticResource PlusLabel}" />
                 <Picker x:Name="XPicker"
-                        Title="Trying to"
+                        Title="Select your X Factor"
                         SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding YourX}">
                 </Picker>

@@ -35,7 +35,7 @@ namespace STEM_Careers.ViewModels
                 await ExecuteLoadItemsCommand(field, X);
         }
 
-        async Task ExecuteLoadItemsCommand(string field = "", string X = "", string orderBy = "")
+        async Task ExecuteLoadItemsCommand(string field = "", string X = "", string orderBy = "Name")
         {
             if (IsBusy)
                 return;
@@ -55,16 +55,20 @@ namespace STEM_Careers.ViewModels
                         MedianSalary = ""
                     });
                 }
-
+                //TODO: Implement sorting and grouping
                 IEnumerable<Job> jobEnum = items.DistinctBy(x => x.Name);
                 items = jobEnum.ToList();
                 switch (orderBy)
                 {
                     case "Salary":
-                        items.OrderBy(job => job.MedianSalary);
+                        items = items.OrderBy(job => job.MedianSalary, comparer: StringComparer.OrdinalIgnoreCase).ToList();
+                        break;
+                    case "Name":
+                        items = items.OrderBy(job => job.Name, comparer: StringComparer.OrdinalIgnoreCase).ToList();
+
                         break;
                     default:
-                        items.OrderBy(job => job.Name);
+                        items = items.OrderBy(job => job.Name, comparer: StringComparer.OrdinalIgnoreCase).ToList();
                         break;
                 }
                 Jobs.ReplaceRange(items);

@@ -46,13 +46,24 @@ namespace STEM_Careers.Views
             {
                 string query = vm.Degree.Name + "+"+  vm.Degree.University;
                 string searchQuery = new SearchQueryCreator().Create(query);
-
                 query = "https://www.google.com.au/search?q=" + searchQuery;
                 //format example of query q=Psychology+australian+national+university&oq=Psychology+australian+national+university
                 Device.OpenUri(new Uri(query));
                 return;
             }
-            Device.OpenUri(new Uri(vm.Degree.LinkToWebsite));
+            App.webHelper.client.GetAsync(new Uri(vm.Degree.LinkToWebsite)).ContinueWith(t =>
+            {
+
+                if(t.Result.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    string query = vm.Degree.Name + "+" + vm.Degree.University;
+                    string searchQuery = new SearchQueryCreator().Create(query);
+                    query = "https://www.google.com.au/search?q=" + searchQuery;
+                    //format example of query q=Psychology+australian+national+university&oq=Psychology+australian+national+university
+                    Device.OpenUri(new Uri(query));
+                }
+                Device.OpenUri(new Uri(vm.Degree.LinkToWebsite));
+            });
         }
     }
 }
