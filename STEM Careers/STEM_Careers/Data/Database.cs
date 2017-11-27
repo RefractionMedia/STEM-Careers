@@ -10,7 +10,7 @@ namespace STEM_Careers.Data
 {
 
     ///<summary>
-    ///The database for all csv files fetched from the web
+    ///The database for all files fetched from the web
     /// </summary>
     public class Database
     {
@@ -21,6 +21,7 @@ namespace STEM_Careers.Data
         private bool JobListInitialized;
         private bool UniRankingInitialized;
         private bool PeopleTableInitialized;
+        private bool FavoritesInitialized;
 
         public bool IsInitializing { get; private set; }
 
@@ -33,22 +34,23 @@ namespace STEM_Careers.Data
             JobListInitialized = false;
             DegreeFinderInitialized = false;
             PeopleTableInitialized = false;
+            FavoritesInitialized = false;
             IsInitializing = true;
             //if database exists we don't have to initialize it 
             try
             {
+                //For Debugging
                 //database.DropTableAsync<Degree>().Wait();
                 //database.DropTableAsync<Job>().Wait();
-                //database.DropTableAsync<University>().Wait();  //DEBUG ONLY
-                //We query the db for an item of id 21, since both csv have at least 22 items, there is a problem only if the app didn't initialize them correctly 
+                //database.DropTableAsync<University>().Wait();
                 int countPeople = databaseDirect.Table<People>().Count();
                 PeopleTableInitialized = true;
                 databaseDirect.Table<Degree>().Where(d => d.ID == 21).First();
+                DegreeFinderInitialized = true;
                 databaseDirect.Table<University>().Where(d => d.ID == 21).First();
+                UniRankingInitialized = true;
                 databaseDirect.Table<Job>().Where(d => d.ID == 21).First();
                 JobListInitialized = true;
-                UniRankingInitialized = true;
-                DegreeFinderInitialized = true;
                 IsInitializing = false;
             }
             catch (Exception sqle)
@@ -57,14 +59,15 @@ namespace STEM_Careers.Data
                 IsInitializing = false;
                 InitializeAsync();
             }
-            //try
-            //{
-            //    databaseDirect.Table<Favorite>().Count();
-            //}catch(Exception e)
-            //{
-            //    e.ToString();
-            //    database.CreateTableAsync<Favorite>();
-            //}
+            try
+            {
+                databaseDirect.Table<Favorite>().Count();
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+                database.CreateTableAsync<Favorite>();
+            }
 
             MessagingCenter.Subscribe<PeopleHelper, People>(this, "AddPerson", async (helper, person) =>
             {
@@ -87,6 +90,8 @@ namespace STEM_Careers.Data
             return tmp == null ? -1 : tmp.ArticleID;
         }
 
+
+        #region Init Methods
         public bool RetryInitAsync()
         {
             if (!IsInitialized() && !IsInitializing)
@@ -126,16 +131,17 @@ namespace STEM_Careers.Data
                 {
                     try
                     {
-                        PeopleTableInitialized = await await  database.CreateTableAsync<People>().ContinueWith(async (t) =>
+                        PeopleTableInitialized = await await database.CreateTableAsync<People>().ContinueWith(async (t) =>
                         {
                             PeopleHelper peopleHelper = new PeopleHelper();
-                            return await peopleHelper.FetchPeopleArticles().ContinueWith( (task)=> {
+                            return await peopleHelper.FetchPeopleArticles().ContinueWith((task) => {
                                 if (!t.IsFaulted)
                                     return true;
                                 return false;
                             });
                         });
-                    }catch(Exception e)
+                    }
+                    catch (Exception e)
                     {
                         e.ToString();
                     }
@@ -185,37 +191,22 @@ namespace STEM_Careers.Data
             }
 
         }
+        #endregion
 
-        public Task<List<Degree>> GetDegreesAsync()
+        #region Degree Methods
+
+        public async Task<University> GetUniversityWithName(string name = "")
         {
-            return database.Table<Degree>().ToListAsync();
+            var listOfUnis = await database.Table<University>().ToListAsync();
+            foreach (var uni in listOfUnis)
+            {
+                if (string.Equals(uni.Name, name, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    return uni;
+                }
+            }
+            return null;
         }
-
-        public Task<Degree> GetSingleDegreeAsync(int id)
-        {
-            return database.Table<Degree>().Where(i => i.ID == id).FirstAsync();
-        }
-
-        public Task<List<Degree>> GetDegreesFieldXStateAsync(string field = "", string X = "", string state = "")
-        {
-            field = field.Equals("Any") ? "" : field;
-            X = X.Equals("Any") ? "" : X;
-            state = state.Equals("Any") ? "" : state;
-
-            var query = database.Table<Degree>().Where(d => d.Field.Contains(field) && d.YourX.Contains(X) && d.State.Contains(state));
-            var returnVal = query.ToListAsync();
-            return returnVal;
-        }
-
-        public Task<List<Job>> GetJobsAsync(string field = "", string X = "")
-        {
-            field = field.Equals("Any") ? "" : field;
-            X = X.Equals("Any") ? "" : X;
-            var query = database.Table<Job>().Where(d => d.Field.Contains(field) && d.YourX.Contains(X));
-            var jobsListed = query.ToListAsync();
-            return jobsListed;
-        }
-
         public async Task<Stack<List<string>>> GetPickerDataAsync()
         {
             List<Degree> databaseListed = await database.Table<Degree>().ToListAsync();
@@ -246,10 +237,55 @@ namespace STEM_Careers.Data
 
             return result;
         }
-
-        internal async Task<int> GetPeopleCount()
+        public Task<List<Degree>> GetDegreesAsync()
         {
-            return await database.Table<People>().CountAsync();
+            return database.Table<Degree>().ToListAsync();
+        }
+
+        public Task<Degree> GetSingleDegreeAsync(int id)
+        {
+            return database.Table<Degree>().Where(i => i.ID == id).FirstAsync();
+        }
+
+        public Task<List<Degree>> GetDegreesFieldXStateAsync(string field = "", string X = "", string state = "")
+        {
+            field = field.Equals("Any") ? "" : field;
+            X = X.Equals("Any") ? "" : X;
+            state = state.Equals("Any") ? "" : state;
+
+            var query = database.Table<Degree>().Where(d => d.Field.Contains(field) && d.YourX.Contains(X) && d.State.Contains(state));
+            var returnVal = query.ToListAsync();
+            return returnVal;
+        }
+
+        //Not used but old habbits die hard
+        public Task<int> SaveDegreeAsync(Degree degree)
+        {
+            if (degree.ID == 0)
+            {
+                return database.UpdateAsync(degree);
+            }
+            else
+            {
+                return database.InsertAsync(degree);
+            }
+        }
+        public Task<int> DeleteDegreeAsync(Degree degree)
+        {
+            return database.DeleteAsync(degree);
+        }
+
+        #endregion
+
+
+        #region Job Methods
+        public Task<List<Job>> GetJobsAsync(string field = "", string X = "")
+        {
+            field = field.Equals("Any") ? "" : field;
+            X = X.Equals("Any") ? "" : X;
+            var query = database.Table<Job>().Where(d => d.Field.Contains(field) && d.YourX.Contains(X));
+            var jobsListed = query.ToListAsync();
+            return jobsListed;
         }
 
         public async Task<Stack<List<string>>> GetSTEMPickerDataAsync()
@@ -276,40 +312,20 @@ namespace STEM_Careers.Data
 
             return result;
         }
+        #endregion
+
+
+
+
+
+        internal async Task<int> GetPeopleCount()
+        {
+            return await database.Table<People>().CountAsync();
+        }
 
         internal async Task<List<People>> GetPeople(string field, string X)
         {
             return await database.Table<People>().Where(p => p.ProfileCategories.Contains(field) && p.ProfileCategories.Contains(X)).OrderByDescending(p=>p.ArticleID).ToListAsync();
-        }
-
-        public async Task<University> GetUniversityWithName(string name = "")
-        {
-            var listOfUnis = await database.Table<University>().ToListAsync();
-            foreach (var uni in listOfUnis)
-            {
-                if (string.Equals(uni.Name, name, StringComparison.CurrentCultureIgnoreCase))
-                {
-                    return uni;
-                }
-            }
-            return null;
-        }
-
-        //Not used but old habbits die hard
-        public Task<int> SaveDegreeAsync(Degree degree)
-        {
-            if (degree.ID == 0)
-            {
-                return database.UpdateAsync(degree);
-            }
-            else
-            {
-                return database.InsertAsync(degree);
-            }
-        }
-        public Task<int> DeleteDegreeAsync(Degree degree)
-        {
-            return database.DeleteAsync(degree);
         }
     }
 }

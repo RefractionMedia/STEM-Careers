@@ -82,7 +82,7 @@ namespace STEM_Careers.Views
                         ProgressDouble = 0.20;
                         break;
                     case "Tables created":
-                        commentLabel.Text = "Downloading degrees";
+                        commentLabel.Text = "Downloading...";
                         ProgressDouble = 0.66;
                         break;
                     case "Initialized":

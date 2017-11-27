@@ -12,7 +12,7 @@
 
                 <Label HorizontalOptions="CenterAndExpand"
                        FontSize="Large"
-                       Text="Who interests you?"
+                       Text="Meet your STEM + X role models"
                        Margin="0,33,0,10"
                        FontAttributes="Bold" />
 

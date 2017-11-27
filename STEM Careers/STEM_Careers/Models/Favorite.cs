@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace STEM_Careers.Models
 {
-    public enum FavGroup { People, Story, Job, University }
+    public enum FavGroup { People, Job, University }
     public class Favorite
     {
         public int Id { get; set; }
