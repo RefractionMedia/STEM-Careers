@@ -62,11 +62,13 @@ namespace STEM_Careers.Data
             try
             {
                 databaseDirect.Table<Favorite>().Count();
+                FavoritesInitialized = true;
             }
             catch (Exception e)
             {
                 e.ToString();
                 database.CreateTableAsync<Favorite>();
+                FavoritesInitialized = true;
             }
 
             MessagingCenter.Subscribe<PeopleHelper, People>(this, "AddPerson", async (helper, person) =>
@@ -74,11 +76,13 @@ namespace STEM_Careers.Data
                 try
                 {
                     var test = await database.Table<People>().Where(p => p.ArticleID == person.ArticleID).FirstOrDefaultAsync();
-                    if(test == null)
+                    if (test == null)
                     {
                         await database.InsertAsync(person);
                     }
-                }catch(Exception e) {
+                }
+                catch (Exception e)
+                {
                     e.ToString();
                 }
             });
@@ -134,7 +138,8 @@ namespace STEM_Careers.Data
                         PeopleTableInitialized = await await database.CreateTableAsync<People>().ContinueWith(async (t) =>
                         {
                             PeopleHelper peopleHelper = new PeopleHelper();
-                            return await peopleHelper.FetchPeopleArticles().ContinueWith((task) => {
+                            return await peopleHelper.FetchPeopleArticles().ContinueWith((task) =>
+                            {
                                 if (!t.IsFaulted)
                                     return true;
                                 return false;
@@ -325,7 +330,7 @@ namespace STEM_Careers.Data
 
         internal async Task<List<People>> GetPeople(string field, string X)
         {
-            return await database.Table<People>().Where(p => p.ProfileCategories.Contains(field) && p.ProfileCategories.Contains(X)).OrderByDescending(p=>p.ArticleID).ToListAsync();
+            return await database.Table<People>().Where(p => p.ProfileCategories.Contains(field) && p.ProfileCategories.Contains(X)).OrderByDescending(p => p.ArticleID).ToListAsync();
         }
     }
 }

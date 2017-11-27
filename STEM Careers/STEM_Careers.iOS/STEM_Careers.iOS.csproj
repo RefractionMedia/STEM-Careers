@@ -246,10 +246,34 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\black_star_empty.imageset\black_star_empty.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\black_star_empty.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\black_star_full.imageset\black_star_full.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\black_star_full.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
     <ImageAsset Include="Resources\Assets.xcassets\cws_logo_white.imageset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
     <ImageAsset Include="Resources\Assets.xcassets\cws_logo_white.imageset\cws_logo_white.pdf">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\gold_star_empty.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\gold_star_empty.imageset\gold_star_empty.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\gold_star_full.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\gold_star_full.imageset\gold_star_full.png">
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>

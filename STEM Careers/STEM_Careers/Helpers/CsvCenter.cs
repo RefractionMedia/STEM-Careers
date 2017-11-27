@@ -89,7 +89,6 @@ namespace STEM_Careers.Helpers
             return true;
         }
 
-
         public async Task<bool> JobDescription(SQLiteAsyncConnection db)
         {
             StreamReader reader = null;
@@ -135,7 +134,6 @@ namespace STEM_Careers.Helpers
             }
             return true;
         }
-
 
         public async Task<bool> UniRankInit(SQLiteAsyncConnection db)
         {

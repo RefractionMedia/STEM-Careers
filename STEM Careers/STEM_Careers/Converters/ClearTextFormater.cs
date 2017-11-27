@@ -8,6 +8,12 @@ namespace STEM_Careers.Converters
         {
         }
 
+        /// <summary>
+        /// Turn the "string-like-that-format" to a nicer "String Like That Format"
+        /// All capital uni names handled here
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public string MakeClearer(string text)
         {
             if(text.Equals("queensland-university-of-technology", StringComparison.CurrentCultureIgnoreCase)){
@@ -17,11 +23,14 @@ namespace STEM_Careers.Converters
             {
                 return "UNSW Australia";
             }
+            if (text.Contains("rmit"))
+            {
+                return "RMIT University";
+            }
             char[] textArray = text.ToCharArray();
             string clearerText = "";
             for(int i= 0; i<textArray.Length; i++)
             {
-                
                 if (i == 0 && char.IsLetterOrDigit(textArray[i]))    //First letter --> uppercase
                     clearerText += char.ToUpper(textArray[i]);
                 else if (i == 0 && !char.IsLetterOrDigit(textArray[i]))    //First is a symbol --> ignore
