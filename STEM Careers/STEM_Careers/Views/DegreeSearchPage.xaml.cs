@@ -40,10 +40,10 @@ namespace STEM_Careers.Views
         private void IndexChanged(object sender, System.EventArgs e)
         {
             App app = Application.Current as App;
-            if(sender is Picker)
+            if (sender is Picker)
             {
                 Picker picker = sender as Picker;
-                if(picker.SelectedIndex != -1)
+                if (picker.SelectedIndex != -1)
                 {
                     app.RegionPickerIndex = regionPicker.SelectedIndex;
                     app.XPickerIndex = XPicker.SelectedIndex;
@@ -51,13 +51,5 @@ namespace STEM_Careers.Views
                 }
             }
         }
-
-        //protected async override void OnAppearing()
-        //{
-        //    if (vm == null)
-        //        vm = new DegreeSearchViewModel();
-        //    BindingContext = vm;
-        //    base.OnAppearing();
-        //}
     }
 }

@@ -21,7 +21,6 @@ namespace STEM_Careers.Data
         private bool JobListInitialized;
         private bool UniRankingInitialized;
         private bool PeopleTableInitialized;
-        private bool FavoritesInitialized;
 
         public bool IsInitializing { get; private set; }
 
@@ -34,7 +33,6 @@ namespace STEM_Careers.Data
             JobListInitialized = false;
             DegreeFinderInitialized = false;
             PeopleTableInitialized = false;
-            FavoritesInitialized = false;
             IsInitializing = true;
             //if database exists we don't have to initialize it 
             try
@@ -59,18 +57,6 @@ namespace STEM_Careers.Data
                 IsInitializing = false;
                 InitializeAsync();
             }
-            try
-            {
-                databaseDirect.Table<Favorite>().Count();
-                FavoritesInitialized = true;
-            }
-            catch (Exception e)
-            {
-                e.ToString();
-                database.CreateTableAsync<Favorite>();
-                FavoritesInitialized = true;
-            }
-
             MessagingCenter.Subscribe<PeopleHelper, People>(this, "AddPerson", async (helper, person) =>
             {
                 try
@@ -87,13 +73,6 @@ namespace STEM_Careers.Data
                 }
             });
         }
-
-        public async Task<int> GetHighestPeopleID()
-        {
-            People tmp = await database.Table<People>().OrderByDescending(p => p.ArticleID).FirstOrDefaultAsync();
-            return tmp == null ? -1 : tmp.ArticleID;
-        }
-
 
         #region Init Methods
         public bool RetryInitAsync()
@@ -199,7 +178,14 @@ namespace STEM_Careers.Data
         #endregion
 
         #region Degree Methods
-
+        internal async Task UpdateDegreeAsync(Degree degree)
+        {
+            Degree old = await database.Table<Degree>().Where(d => d.ID == degree.ID).FirstOrDefaultAsync();
+            if (old != null)
+            {
+                await database.UpdateAsync(degree);
+            }
+        }
         public async Task<University> GetUniversityWithName(string name = "")
         {
             var listOfUnis = await database.Table<University>().ToListAsync();
@@ -284,6 +270,14 @@ namespace STEM_Careers.Data
 
 
         #region Job Methods
+        internal async Task UpdateJobAsync(Job job)
+        {
+            Job old = await database.Table<Job>().Where(d => d.ID == job.ID).FirstOrDefaultAsync();
+            if (old != null)
+            {
+                await database.UpdateAsync(job);
+            }
+        }
         public Task<List<Job>> GetJobsAsync(string field = "", string X = "")
         {
             field = field.Equals("Any") ? "" : field;
@@ -319,7 +313,20 @@ namespace STEM_Careers.Data
         }
         #endregion
 
+        internal async Task UpdatePersonAsync(People person)
+        {
+            People old = await database.Table<People>().Where(d => d.ArticleID == person.ArticleID).FirstOrDefaultAsync();
+            if (old != null)
+            {
+                await database.UpdateAsync(person);
+            }
+        }
 
+        public async Task<int> GetHighestPeopleID()
+        {
+            People tmp = await database.Table<People>().OrderByDescending(p => p.ArticleID).FirstOrDefaultAsync();
+            return tmp == null ? -1 : tmp.ArticleID;
+        }
 
 
 

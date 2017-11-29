@@ -15,7 +15,12 @@ namespace STEM_Careers.ViewModels
         public ObservableRangeCollection<Job> Jobs { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Job selectedJob { get; set; }
-
+        private bool noResults = false;
+        public bool NoResults
+        {
+            get { return noResults; }
+            set { SetProperty(ref noResults, value); }
+        }
         private string field;
         private string X;
 
@@ -49,11 +54,7 @@ namespace STEM_Careers.ViewModels
 
                 if (items.Count == 0)
                 {
-                    items.Add(new Job()
-                    {
-                        Name = "Sorry, no results",
-                        MedianSalary = ""
-                    });
+                    NoResults = true;
                 }
                 //TODO: Implement sorting and grouping
                 IEnumerable<Job> jobEnum = items.DistinctBy(x => x.Name);

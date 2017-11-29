@@ -154,6 +154,7 @@ namespace STEM_Careers.Helpers
                 People person = new People
                 {
                     ArticleID = ID,
+                    IsFavorite = false,
                     Title = aTag.Attributes["title"].Value,
                     Href = aTag.Attributes["href"].Value,
                     ImgReference = imgTag.Attributes["src"].Value,

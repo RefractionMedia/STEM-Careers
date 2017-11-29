@@ -15,6 +15,18 @@ namespace STEM_Careers.ViewModels
         public Command LoadItemsCommand { get; set; }
         public Degree Degree { get; set; }
         private University university;
+
+        public string ImagePath
+        {
+            get
+            {
+                if (Degree.IsFavorite)
+                    return "gold_star_full.png";
+                else
+                    return "gold_star_empty.png";
+            }
+            set { }
+        }
         public University University
         {
             get { return university; }
@@ -34,7 +46,7 @@ namespace STEM_Careers.ViewModels
             await ExecuteLoadItemsCommand(Degree.University);
         }
 
-        async Task ExecuteLoadItemsCommand(string name="")
+        async Task ExecuteLoadItemsCommand(string name = "")
         {
             if (IsBusy)
                 return;
@@ -45,7 +57,7 @@ namespace STEM_Careers.ViewModels
             {
                 University = await App.Database.GetUniversityWithName(name);
 
-                if (University ==null)
+                if (University == null)
                 {
                     University = new University
                     {

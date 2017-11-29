@@ -72,6 +72,7 @@ namespace STEM_Careers.Helpers
                     {
                         job = new Job()
                         {
+                            IsFavorite = false,
                             Field = field,
                             YourX = StemPlusXs[(x - 1) / 2],
                             Name = csv.GetField<string>(x).Trim(),
@@ -193,6 +194,7 @@ namespace STEM_Careers.Helpers
                 degree.Name = csv.GetField<string>(0);
                 degree.Field = csv.GetField<string>(2);
                 degree.YourX = csv.GetField<string>(3);
+                degree.IsFavorite = false;
 
                 //The following is a beautification of the plain-nouppercase-naming to suit the other CSV, see ClearTextFormater class
                 ClearTextFormater formater = new ClearTextFormater();

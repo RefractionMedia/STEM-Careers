@@ -4,13 +4,23 @@ using System.Threading.Tasks;
 using STEM_Careers.Helpers;
 using Xamarin.Forms;
 using System.Diagnostics;
+using System.Linq;
+using STEM_Careers.Data;
+using System.Windows.Input;
 
 namespace STEM_Careers.ViewModels
 {
     class DegreePageViewModel : BaseViewModel
     {
-        public ObservableRangeCollection<Degree> Degrees { get; set; }
+        public ObservableRangeCollection<Grouping<string, Degree>> Degrees { get; set; }
         public Command LoadItemsCommand { get; set; }
+
+        private bool noResults = false;
+        public bool NoResults
+        {
+            get { return noResults; }
+            set { SetProperty(ref noResults, value); }
+        }
 
         private string field;
         private string X;
@@ -28,11 +38,10 @@ namespace STEM_Careers.ViewModels
             title += " + ";
             title += state == "" ? "Any" : state;
             Title = title;
-            Degrees = new ObservableRangeCollection<Degree>();
+            Degrees = new ObservableRangeCollection<Grouping<string, Degree>>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(field, X, state));
         }
-
-
+        
         public async Task Initialize()
         {
             if(Degrees.Count< 2)
@@ -50,17 +59,20 @@ namespace STEM_Careers.ViewModels
             {
                 Degrees.Clear();
                 var items = await App.Database.GetDegreesFieldXStateAsync(field, X, state);
-                
+
+                var sorted =
+                    from d in items
+                    orderby d.University
+                    group d by d.University
+                    into grouped
+                    select new Grouping<string, Degree>(grouped.Key, grouped);
+
                 if(items.Count == 0)
                 {
-                    items.Add(new Degree()
-                    {
-                        Name = "Sorry, no results",
-                        University=""
-                    });
-
+                    NoResults = true;
                 }
-                Degrees.ReplaceRange(items);
+
+                Degrees.ReplaceRange(sorted);
             }
             catch (Exception ex)
             {

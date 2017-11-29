@@ -2,16 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="STEM_Careers.Views.DegreeDetailsPage"
-             Title="{Binding Degree.University}">
+             xmlns:selectors="clr-namespace:STEM_Careers.Views.Selectors"
+             Title="Details">
     <ScrollView>
         <StackLayout Spacing="5"
                      Padding="15">
             <Label Text="{Binding Degree.University}"
-                   FontSize="Large"
-                   FontAttributes="Bold" />
-            <Label Text="{Binding Degree.Name}"
-                   FontSize="Medium"
-                   FontAttributes="Bold" />
+                   Style="{StaticResource TitleLabel}" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Degree.Name}"
+                       Style="{StaticResource DetailsLabel}" />
+                <Image Source="{Binding ImagePath}"
+                       Aspect="AspectFit">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
             <StackLayout Orientation="Horizontal"
                          Spacing="10">
                 <Label Text="QS World University Rank: "
@@ -24,11 +31,8 @@
             </StackLayout>
 
 
-            <Label Text="Description"
-                   FontSize="Medium"
-                   FontAttributes="Bold" />
             <Label Text="{Binding University.Description}"
-                   FontSize="Small" />
+                   Style="{StaticResource ClearTextLabel}" />
 
             <StackLayout Orientation="Horizontal"
                          Padding="0"

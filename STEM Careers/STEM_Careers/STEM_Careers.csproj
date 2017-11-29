@@ -42,6 +42,7 @@
     <Compile Include="Converters\ClearTextFormater.cs" />
     <Compile Include="Converters\SearchQueryCreator.cs" />
     <Compile Include="Data\Database.cs" />
+    <Compile Include="Data\Grouping.cs" />
     <Compile Include="Data\IFileHelper.cs" />
     <Compile Include="Helpers\CsvCenter.cs" />
     <Compile Include="Helpers\CwSTEMapi.cs" />
@@ -53,7 +54,6 @@
     <Compile Include="Models\BaseDataObject.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Degree.cs" />
-    <Compile Include="Models\Favorite.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="Models\Story.cs" />
@@ -120,6 +120,8 @@
     <Compile Include="Views\PeoplePickPage.xaml.cs">
       <DependentUpon>PeoplePickPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Selectors\DegreeDataTemplateSelector.cs" />
+    <Compile Include="Views\Selectors\JobDataTemplateSelector.cs" />
     <Compile Include="Views\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
     </Compile>
@@ -282,6 +284,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

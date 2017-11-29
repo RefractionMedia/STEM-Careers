@@ -13,5 +13,7 @@ namespace STEM_Careers.Models
         public string YourX { get;set; }
         public string University { get; set; }
         public string LinkToWebsite { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

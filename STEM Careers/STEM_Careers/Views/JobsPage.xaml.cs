@@ -1,5 +1,6 @@
 ﻿using STEM_Careers.Models;
 using STEM_Careers.ViewModels;
+using System;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -34,6 +35,10 @@ namespace STEM_Careers.Views
             base.OnAppearing();
         }
 
+        private void Goback_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
         private async Task JobListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = e.SelectedItem as Job;

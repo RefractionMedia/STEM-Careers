@@ -38,6 +38,7 @@ namespace STEM_Careers.Views
             await vm.Initialize();
             BindingContext = vm;
             base.OnAppearing();
+            
         }
 
         private void OpenWebLink(object sender, EventArgs e)
@@ -73,6 +74,26 @@ namespace STEM_Careers.Views
             //    Device.OpenUri(new Uri(vm.Degree.LinkToWebsite));
             //});
             #endregion
+        }
+
+        private async Task StarTapped(object sender, EventArgs args)
+        {
+            var image = sender as Image;
+            var bindinContext = image.BindingContext;
+
+            var degreeVM = bindinContext as DegreeDetailsViewModel;
+            var degree = degreeVM.Degree;
+            if (degree.IsFavorite == false)
+            {
+                degree.IsFavorite = true;
+                image.Source = "gold_star_full";
+            }
+            else
+            {
+                degree.IsFavorite = false;
+                image.Source = "gold_star_empty";
+            }
+            await App.Database.UpdateDegreeAsync(degree);
         }
     }
 }

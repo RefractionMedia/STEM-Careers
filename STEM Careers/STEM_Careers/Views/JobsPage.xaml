@@ -6,6 +6,19 @@
     <ContentPage.Content>
        
         <StackLayout>
+            <Label Text="Sorry, nothing seems to match your selection.."
+                   IsVisible="{Binding NoResults}"
+                   IsEnabled="{Binding NoResults}"
+                   FontSize="Medium"
+                   FontAttributes="Italic"
+                   Margin="5"
+                   HorizontalOptions="CenterAndExpand"
+                   TextColor="{StaticResource SplitComplementVibrant}" />
+            <Button  IsVisible="{Binding NoResults}"
+                     IsEnabled="{Binding NoResults}"
+                     Text="Go back"
+                     HorizontalOptions="Center"
+                     Clicked="Goback_Clicked" />
             <ListView x:Name="JobListView"
                       ItemsSource="{Binding Jobs}"
                       VerticalOptions="FillAndExpand"

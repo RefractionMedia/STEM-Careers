@@ -18,6 +18,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4*" />
                             <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="2*" />
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0"
                                Grid.Row="0"
@@ -41,19 +42,25 @@
                                FontSize="Small"
                                Text="{Binding Description}"
                                LineBreakMode="WordWrap" />
+                        <Image Grid.Column="2"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"
+                               Source="gold_star_empty.png"
+                               Aspect="AspectFit" />
                     </Grid>
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Even after a thourough search, nothing seems to match your selection.."
+            <Label Text="Sorry, nothing seems to match your selection.."
                    IsVisible="{Binding NoResults}"
                    IsEnabled="{Binding NoResults}"
                    FontSize="Medium"
                    FontAttributes="Italic"
-                   Margin="25"
+                   Margin="5"
                    HorizontalOptions="CenterAndExpand"
                    TextColor="{StaticResource SplitComplementVibrant}" />
             <Button  IsVisible="{Binding NoResults}"
@@ -62,16 +69,15 @@
                      HorizontalOptions="Center"
                      Clicked="Goback_Clicked"/>
             <ListView x:Name="PeopleListView"
+                      ItemsSource="{Binding Peeps}"
+                      ItemTemplate="{StaticResource personCell}"
+                      ItemSelected="PeopleListView_ItemSelected"
+                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       IsPullToRefreshEnabled="True"
                       Refreshing="PeopleListView_Refreshing"
-                      RefreshCommand=""
-                      ItemSelected="PeopleListView_ItemSelected"
-                      ItemsSource="{Binding Peeps}"
                       HasUnevenRows="False"
                       RowHeight="200"
-                      IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                      CachingStrategy="RecycleElementAndDataTemplate"
-                      ItemTemplate="{StaticResource personCell}">
+                      CachingStrategy="RecycleElementAndDataTemplate">
             </ListView>
         </StackLayout>
     </ContentPage.Content>

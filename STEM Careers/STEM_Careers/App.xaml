@@ -85,6 +85,19 @@
                 <Setter Property="TextColor"
                         Value="{StaticResource Primary}" />
             </Style>
+
+            <DataTemplate x:Key="GroupingTemplate">
+                <ViewCell Height="40">
+                    <StackLayout VerticalOptions="FillAndExpand"
+                                 Padding="10"
+                                 BackgroundColor="{StaticResource MonochromaticDarker}">
+                        <Label Text="{Binding Key}"
+                               TextColor="White"
+                               FontSize="Medium"
+                               VerticalOptions="Center" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
