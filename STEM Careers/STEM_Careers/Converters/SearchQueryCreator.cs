@@ -14,7 +14,7 @@ namespace STEM_Careers.Converters
             char[] textArray = text.ToCharArray();
             foreach (char c in textArray)
             {
-                if (!char.IsLetter(c))
+                if (!char.IsLetterOrDigit(c))
                 {
                     query += '+';
                 }

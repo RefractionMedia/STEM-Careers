@@ -287,7 +287,7 @@ namespace STEM_Careers.Helpers
                         return true;
                     break;
                 case "Start a business":
-                    if (categories.Contains("business"))
+                    if (categories.Contains("business") || categories.Contains("startup"))
                         return true;
                     break;
                 case "Maths":

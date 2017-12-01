@@ -29,18 +29,9 @@ namespace STEM_Careers.Views
             Title = title;
         }
 
-        private async Task PeopleListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        protected override void OnAppearing()
         {
-            if (sender is ListView)
-            {
-                ListView listView = sender as ListView;
-                People person = listView.SelectedItem as People;
-                listView.SelectedItem = null;
-                //if (person != null)
-                //    await Navigation.PushAsync(new WebViewPage(person.Href));
-                //for later on if time allows it
-                await Navigation.PushAsync(new PeopleDetailPage(person));
-            }
+            base.OnAppearing();
         }
 
         private void Goback_Clicked(object sender, EventArgs e)
@@ -54,6 +45,42 @@ namespace STEM_Careers.Views
             {
                 vm.Update();
             }
+        }
+
+        private async Task ItemSelected(object sender, EventArgs e)
+        {
+            var vc = sender as ViewCell;
+            var parent = vc.Parent;
+            while (!(parent is ListView))
+            {
+                parent = parent.Parent;
+            }
+            var listView = parent as ListView;
+            var person = listView.SelectedItem as People;
+            listView.SelectedItem = null;
+            if (person == null)
+                return;
+            await Navigation.PushAsync(new PeopleDetailPage(person));
+            return;
+        }
+
+        private async Task StarTapped(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var bindinContext = image.BindingContext;
+
+            var person = bindinContext as People;
+            if (person.IsFavorite == false)
+            {
+                person.IsFavorite = true;
+                image.Source = "gold_star_full";
+            }
+            else
+            {
+                person.IsFavorite = false;
+                image.Source = "gold_star_empty";
+            }
+            await App.Database.UpdatePersonAsync(person);
         }
     }
 }

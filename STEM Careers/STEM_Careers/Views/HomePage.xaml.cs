@@ -33,5 +33,9 @@ namespace STEM_Careers.Views
             Navigation.PushAsync(new PeoplePickPage());
         }
 
+        private void Favorites(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new FavoritePage());
+        }
     }
 }

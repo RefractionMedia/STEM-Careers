@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using System.Collections.ObjectModel;
 
 namespace STEM_Careers.Data
 {
@@ -272,11 +273,19 @@ namespace STEM_Careers.Data
         #region Job Methods
         internal async Task UpdateJobAsync(Job job)
         {
-            Job old = await database.Table<Job>().Where(d => d.ID == job.ID).FirstOrDefaultAsync();
-            if (old != null)
+            try
             {
-                await database.UpdateAsync(job);
+                Job old = await database.Table<Job>().Where(d => d.ID == job.ID).FirstOrDefaultAsync();
+                if (old != null)
+                {
+                    await database.UpdateAsync(job);
+                }
             }
+            catch(Exception e)
+            {
+                e.ToString();
+            }
+            
         }
         public Task<List<Job>> GetJobsAsync(string field = "", string X = "")
         {
@@ -339,5 +348,15 @@ namespace STEM_Careers.Data
         {
             return await database.Table<People>().Where(p => p.ProfileCategories.Contains(field) && p.ProfileCategories.Contains(X)).OrderByDescending(p => p.ArticleID).ToListAsync();
         }
+
+        internal async Task<ObservableRangeCollection<object>> GetFavorites()
+        {
+            ObservableRangeCollection<object> faves = new ObservableRangeCollection<object>();
+            faves.AddRange(await database.Table<People>().Where(fave => fave.IsFavorite == true).ToListAsync());
+            faves.AddRange(await database.Table<Job>().Where(fave => fave.IsFavorite == true).ToListAsync());
+            faves.AddRange(await database.Table<Degree>().Where(fave => fave.IsFavorite == true).ToListAsync());
+            return faves;
+        }
+
     }
 }

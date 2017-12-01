@@ -5,16 +5,38 @@
     <ContentPage.Content>
         <StackLayout Padding="15"
                      Spacing="5">
-            <Label Text="{Binding selectedJob.Name}"
-                   Style="{StaticResource TitleLabel}" />
+            <Grid RowSpacing="0"
+                  ColumnSpacing="5"
+                  Margin="10"
+                  Padding="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="{Binding selectedJob.Name}"
+                       Style="{StaticResource TitleLabel}" />
+                <Image Grid.Row="0"
+                       Grid.Column="1"
+                       Source="{Binding ImagePath}"
+                       Aspect="AspectFit">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Median Salary"
-                       Style="{StaticResource DetailsLabel}"/>
+                       Style="{StaticResource DetailsLabel}" />
                 <Label Text="{Binding selectedJob.MedianSalary}"
-                       Style="{StaticResource DetailsLabel}"/>
+                       Style="{StaticResource DetailsLabel}" />
             </StackLayout>
-            <Label Text="{Binding selectedJob.Description}" 
-                   Style="{StaticResource ClearTextLabel}"/>
+            <Label Text="{Binding selectedJob.Description}"
+                   Style="{StaticResource ClearTextLabel}" />
 
             <StackLayout Orientation="Horizontal"
                          Padding="0"

@@ -11,10 +11,11 @@ namespace STEM_Careers.ViewModels
 {
     public class JobsViewModel : BaseViewModel
     {
-
         public ObservableRangeCollection<Job> Jobs { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Job selectedJob { get; set; }
+
+        public string ImagePath { get { return selectedJob.IsFavorite ? "gold_star_full.png" : "gold_star_empty.png"; } }
         private bool noResults = false;
         public bool NoResults
         {

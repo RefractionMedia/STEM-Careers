@@ -1,6 +1,8 @@
 ﻿using STEM_Careers.Converters;
+using STEM_Careers.Models;
 using STEM_Careers.ViewModels;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,7 +17,14 @@ namespace STEM_Careers.Views
 			InitializeComponent ();
             this.vm = vm;
             BindingContext = vm;
+        }
 
+        public JobDetailPage(Job job)
+        {
+            InitializeComponent();
+            vm = new JobsViewModel();
+            vm.selectedJob = job;
+            BindingContext = vm;
         }
         private void OpenWebLink(object sender, EventArgs e)
         {
@@ -40,6 +49,26 @@ namespace STEM_Careers.Views
                 Device.OpenUri(new Uri(query));
                 return;
             }
+        }
+
+        private async Task StarTapped(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var bindinContext = image.BindingContext;
+
+            var jobVM = bindinContext as JobsViewModel;
+            var job = jobVM.selectedJob as Job;
+            if (job.IsFavorite == false)
+            {
+                job.IsFavorite = true;
+                image.Source = "gold_star_full";
+            }
+            else
+            {
+                job.IsFavorite = false;
+                image.Source = "gold_star_empty";
+            }
+            await App.Database.UpdateJobAsync(job);
         }
     }
 }

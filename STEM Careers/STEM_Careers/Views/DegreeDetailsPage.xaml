@@ -7,18 +7,21 @@
     <ScrollView>
         <StackLayout Spacing="5"
                      Padding="15">
-            <Label Text="{Binding Degree.University}"
-                   Style="{StaticResource TitleLabel}" />
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Degree.Name}"
-                       Style="{StaticResource DetailsLabel}" />
-                <Image Source="{Binding ImagePath}"
+                <Label HorizontalOptions="StartAndExpand"
+                       Text="{Binding Degree.Name}"
+                       Style="{StaticResource TitleLabel}" />
+                <Image HorizontalOptions="End"
+                       Source="{Binding ImagePath}"
                        Aspect="AspectFit">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="StarTapped" />
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
+               
+                <Label Text="{Binding Degree.University}"
+                   Style="{StaticResource DetailsLabel}" />
             <StackLayout Orientation="Horizontal"
                          Spacing="10">
                 <Label Text="QS World University Rank: "

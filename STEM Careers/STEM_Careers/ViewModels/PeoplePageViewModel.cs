@@ -1,17 +1,8 @@
 ﻿using STEM_Careers.Helpers;
 using STEM_Careers.Models;
-using System;
-using System.Xml;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Net.Http;
-using HtmlAgilityPack;
 using System.Linq;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace STEM_Careers.ViewModels
 {

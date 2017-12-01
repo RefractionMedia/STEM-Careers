@@ -25,12 +25,12 @@ namespace STEM_Careers.Views
             Title = title;
         }
 
-       
         protected async override void OnAppearing()
         {
             if (vm == null)
                 vm = new JobsViewModel();
             await vm.Initialize();
+            InitializeComponent();
             BindingContext = vm;
             base.OnAppearing();
         }
@@ -39,16 +39,41 @@ namespace STEM_Careers.Views
         {
             Navigation.PopAsync();
         }
-        private async Task JobListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async Task ItemSelected(object sender, EventArgs e)
         {
-            var item = e.SelectedItem as Job;
-            if (item == null)
+            var vc = sender as ViewCell;
+            var parent = vc.Parent;
+            while (!(parent is ListView))
+            {
+                parent = parent.Parent;
+            }
+            var listView = parent as ListView;
+            var job = listView.SelectedItem as Job;
+            listView.SelectedItem = null;
+            if (job == null)
                 return;
-            if (sender is ListView listView)
-                listView.SelectedItem = null;
-            vm.selectedJob = item;
+            vm.selectedJob = job;
             await Navigation.PushAsync(new JobDetailPage(this.vm));
             return;
+        }
+
+        private async Task StarTapped(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var bindinContext = image.BindingContext;
+
+            var job = bindinContext as Job;
+            if (job.IsFavorite == false)
+            {
+                job.IsFavorite = true;
+                image.Source = "gold_star_full";
+            }
+            else
+            {
+                job.IsFavorite = false;
+                image.Source = "gold_star_empty";
+            }
+            await App.Database.UpdateJobAsync(job);
         }
     }
 }
