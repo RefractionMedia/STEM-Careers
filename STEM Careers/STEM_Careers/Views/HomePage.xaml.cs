@@ -37,5 +37,10 @@ namespace STEM_Careers.Views
         {
             Navigation.PushAsync(new FavoritePage());
         }
+
+        private void AboutUs(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new AboutPage());
+        }
     }
 }

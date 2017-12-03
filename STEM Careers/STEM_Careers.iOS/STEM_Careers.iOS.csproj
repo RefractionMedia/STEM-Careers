@@ -264,6 +264,12 @@
     <ImageAsset Include="Resources\Assets.xcassets\cws_logo_white.imageset\cws_logo_white.pdf">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\featuredGraphic.imageset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Assets.xcassets\featuredGraphic.imageset\featuredGraphic.png">
+      <InProject>false</InProject>
+    </ImageAsset>
     <ImageAsset Include="Resources\Assets.xcassets\gold_star_empty.imageset\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>

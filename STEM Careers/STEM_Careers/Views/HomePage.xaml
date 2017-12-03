@@ -42,6 +42,10 @@
                         Style="{StaticResource ButtonDefault}"
                         Text="Your Favorites"
                         Clicked="Favorites" />
+                <Button x:Name="AboutUsButton"
+                        Style="{StaticResource ButtonDefault}"
+                        Text="About us"
+                        Clicked="AboutUs" />
             </StackLayout>
         </StackLayout>
 

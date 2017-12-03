@@ -11,5 +11,10 @@ namespace STEM_Careers.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Clicked(object sender, System.EventArgs e)
+        {
+            Device.OpenUri(new System.Uri("https://careerswithstem.com.au"));
+        }
     }
 }

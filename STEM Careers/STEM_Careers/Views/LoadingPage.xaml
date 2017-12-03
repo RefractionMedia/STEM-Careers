@@ -26,7 +26,13 @@
 
             <Label x:Name="disclaimerLabel"
                    Margin="10"
-                   Text="This first step only happens at first launch, please make sure you have good internet connection for this may take a minute or two"
+                   Text="Welcome! In just a moment over 1000 cool STEM degree options will be in your phone - make sure you're on WiFi to speed up the process and we'll be finished shortly."
+                   FontSize="Medium"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+            <Label x:Name="disclaimerLabel2"
+                   Margin="10"
+                   Text="Please leave the app open meanwhile."
                    FontSize="Medium"
                    FontAttributes="Bold"
                    HorizontalTextAlignment="Center" />
