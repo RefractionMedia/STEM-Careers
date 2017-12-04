@@ -4,50 +4,90 @@
              x:Class="STEM_Careers.Views.DegreeDetailsPage"
              xmlns:selectors="clr-namespace:STEM_Careers.Views.Selectors"
              Title="Details">
-    <ScrollView>
-        <StackLayout Spacing="5"
-                     Padding="15">
-            <StackLayout Orientation="Horizontal">
-                <Label HorizontalOptions="StartAndExpand"
-                       Text="{Binding Degree.Name}"
-                       Style="{StaticResource TitleLabel}" />
-                <Image HorizontalOptions="End"
-                       Source="{Binding ImagePath}"
-                       Aspect="AspectFit">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="StarTapped" />
-                    </Image.GestureRecognizers>
-                </Image>
+    <ScrollView Margin="3"
+                BackgroundColor="{StaticResource SplitComplementSooth}">
+        <StackLayout BackgroundColor="White"
+                     Margin="3">
+            <StackLayout Spacing="5"
+                         Margin="5,5,0,0"
+                         Padding="5,5,5,0"
+                         BackgroundColor="White">
+                <Grid RowSpacing="0"
+                      ColumnSpacing="2"
+                      Padding="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource TitleLabel}"
+                           Text="{Binding Degree.Name}"
+                           LineBreakMode="WordWrap" />
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           FontAttributes="Italic"
+                           FontSize="Medium"
+                           Style="{StaticResource DetailsLabel}"
+                           Text="{Binding Degree.University}"
+                           LineBreakMode="WordWrap" />
+                    <Image Grid.Column="1"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           HorizontalOptions="End"
+                           VerticalOptions="Start"
+                           Source="{Binding ImagePath}"
+                           Aspect="AspectFit">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="StarTapped" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
             </StackLayout>
-               
-                <Label Text="{Binding Degree.University}"
-                   Style="{StaticResource DetailsLabel}" />
-            <StackLayout Orientation="Horizontal"
-                         Spacing="10">
-                <Label Text="QS World University Rank: "
-                       FontSize="Medium"
-                       FontAttributes="Bold" />
-                <Label Text="{Binding University.Rank}"
-                       FontSize="Medium"
-                       FontAttributes="Bold"
-                       TextColor="{StaticResource SplitComplementVibrant}" />
+            <StackLayout Spacing="5"
+                         Margin="5,0"
+                         Padding="5,0"
+                         BackgroundColor="White">
+                <StackLayout HorizontalOptions="FillAndExpand"
+                             Orientation="Horizontal"
+                             BackgroundColor="White"
+                             Margin="0"
+                             Padding="0"
+                             Spacing="5">
+                    <Label Text="QS World University Rank: "
+                           Style="{StaticResource TitleListLabel}" />
+                    <Label Text="{Binding University.Rank}"
+                           FontSize="Medium"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource SplitComplementVibrant}" />
+                </StackLayout>
             </StackLayout>
-
-
-            <Label Text="{Binding University.Description}"
-                   Style="{StaticResource ClearTextLabel}" />
-
-            <StackLayout Orientation="Horizontal"
-                         Padding="0"
-                         Spacing="0"
-                         HorizontalOptions="StartAndExpand">
+            <StackLayout Spacing="5"
+                         Margin="5,0"
+                         Padding="5,0"
+                         BackgroundColor="White">
+                <Label Text="{Binding University.Description}"
+                       Style="{StaticResource ClearTextLabel}"
+                       BackgroundColor="White"
+                       HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+            <StackLayout Spacing="5"
+                         Margin="5"
+                         Padding="5"
+                         BackgroundColor="White">
                 <Button x:Name="linkButton"
                         Text="Link to website"
+                        HorizontalOptions="FillAndExpand"
+                        BackgroundColor="White"
                         Style="{StaticResource ButtonOutsideLink}"
                         Clicked="OpenWebLink" />
             </StackLayout>
-
-
         </StackLayout>
     </ScrollView>
 

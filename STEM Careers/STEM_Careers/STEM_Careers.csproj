@@ -124,7 +124,6 @@
     <Compile Include="Views\PeoplePickPage.xaml.cs">
       <DependentUpon>PeoplePickPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Selectors\DegreeDataTemplateSelector.cs" />
     <Compile Include="Views\Selectors\FavoritesPageSelector.cs" />
     <Compile Include="Views\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>

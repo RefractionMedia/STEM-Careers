@@ -6,7 +6,7 @@
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <DataTemplate x:Key="degreeFavoriteTemplate">
+            <DataTemplate x:Key="DegreeTemplate">
                 <ViewCell Tapped="OnItemSelected">
                     <Grid RowSpacing="0"
                           ColumnSpacing="2"
@@ -62,65 +62,6 @@
                     </Grid>
                 </ViewCell>
             </DataTemplate>
-            <DataTemplate x:Key="degreeRegularTemplate">
-                <ViewCell Tapped="OnItemSelected">
-                    <Grid RowSpacing="0"
-                          ColumnSpacing="2"
-                          Margin="5"
-                          Padding="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="40" />
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0"
-                               Grid.Column="0"
-                               Style="{StaticResource TitleListLabel}"
-                               Text="{Binding Name}"
-                               LineBreakMode="WordWrap" />
-                        <Label Grid.Row="1"
-                               Grid.Column="0"
-                               FontAttributes="Italic"
-                               FontSize="Medium"
-                               Style="{StaticResource DetailsLabel}"
-                               Text="{Binding University}"
-                               LineBreakMode="WordWrap" />
-                        <Image Grid.Column="1"
-                               Grid.Row="0"
-                               Grid.RowSpan="2"
-                               HeightRequest="40"
-                               WidthRequest="40"
-                               HorizontalOptions="End"
-                               VerticalOptions="Start"
-                               Source="gold_star_empty.png"
-                               Aspect="AspectFit">
-                            <Image.Triggers>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding IsFavorite}"
-                                             Value="True">
-                                    <Setter Property="Source"
-                                            Value="gold_star_full.png" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Image"
-                                             Binding="{Binding IsFavorite}"
-                                             Value="False">
-                                    <Setter Property="Source"
-                                            Value="gold_star_empty.png" />
-                                </DataTrigger>
-                            </Image.Triggers>
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="StarTapped"/>
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-            <selectors:DegreeDataTemplateSelector x:Key="degreeDataTemplateSelector"
-                                                  DegreeRegularTemplate="{StaticResource degreeRegularTemplate}"
-                                                  FavoriteTemplate="{StaticResource degreeFavoriteTemplate}" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -141,7 +82,7 @@
                      Clicked="Goback_Clicked" />
             <ListView x:Name="DegreeListView"
                       ItemsSource="{Binding Degrees}"
-                      ItemTemplate="{StaticResource degreeDataTemplateSelector}"
+                      ItemTemplate="{StaticResource DegreeTemplate}"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       HasUnevenRows="True"
                       IsGroupingEnabled="True"

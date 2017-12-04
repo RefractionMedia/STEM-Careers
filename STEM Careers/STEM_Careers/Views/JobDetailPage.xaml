@@ -3,59 +3,77 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="STEM_Careers.Views.JobDetailPage">
     <ContentPage.Content>
-        <StackLayout Padding="15"
-                     Spacing="5">
-            <Grid RowSpacing="0"
-                  ColumnSpacing="5"
-                  Margin="10"
-                  Padding="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Grid.Row="0"
-                       Grid.Column="0"
-                       Text="{Binding selectedJob.Name}"
-                       Style="{StaticResource TitleLabel}" />
-                <Image Grid.Row="0"
-                       Grid.Column="1"
-                       Source="{Binding ImagePath}"
-                       Aspect="AspectFit">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="StarTapped" />
-                    </Image.GestureRecognizers>
-                </Image>
-            </Grid>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Median Salary"
-                       Style="{StaticResource DetailsLabel}" />
-                <Label Text="{Binding selectedJob.MedianSalary}"
-                       Style="{StaticResource DetailsLabel}" />
+        <ScrollView Margin="3"
+                    BackgroundColor="{StaticResource SplitComplementVibrant}">
+            <StackLayout BackgroundColor="White"
+                         Margin="3">
+                <StackLayout Spacing="5"
+                             Margin="5,5,0,0"
+                             Padding="5,5,5,0"
+                             BackgroundColor="White">
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="2"
+                          Padding="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Style="{StaticResource TitleLabel}"
+                               Text="{Binding selectedJob.Name}"
+                               LineBreakMode="WordWrap" />
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               FontAttributes="Italic"
+                               FontSize="Medium"
+                               Style="{StaticResource DetailsLabel}"
+                               Text="{Binding selectedJob.MedianSalary}"
+                               LineBreakMode="WordWrap" />
+                        <Image Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               Source="{Binding ImagePath}"
+                               Aspect="AspectFit">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="StarTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </StackLayout>
+                <StackLayout Spacing="5"
+                             Margin="5,0"
+                             Padding="5,0"
+                             BackgroundColor="White">
+                    <Label Text="{Binding selectedJob.Description}"
+                           Style="{StaticResource ClearTextLabel}"
+                           BackgroundColor="White"
+                           HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                <StackLayout Spacing="5"
+                             Margin="5"
+                             Padding="5"
+                             BackgroundColor="White">
+                    <Button x:Name="jobsSearch"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Google search: that job in Australia"
+                            Style="{StaticResource ButtonOutsideLink}"
+                            Clicked="OpenWebLink" />
+                    <Button x:Name="jobsInfo"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Google search : job information"
+                            Style="{StaticResource ButtonOutsideLink}"
+                            Clicked="OpenWebLink" />
+                </StackLayout>
             </StackLayout>
-            <Label Text="{Binding selectedJob.Description}"
-                   Style="{StaticResource ClearTextLabel}" />
-
-            <StackLayout Orientation="Horizontal"
-                         Padding="0"
-                         Spacing="0"
-                         HorizontalOptions="StartAndExpand">
-                <Button x:Name="jobsSearch"
-                        Text="Google search: that job in Australia"
-                        Style="{StaticResource ButtonOutsideLink}"
-                        Clicked="OpenWebLink" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal"
-                         Padding="0"
-                         Spacing="0"
-                         HorizontalOptions="StartAndExpand">
-                <Button x:Name="jobsInfo"
-                        Text="Google search : job information"
-                        Style="{StaticResource ButtonOutsideLink}"
-                        Clicked="OpenWebLink" />
-            </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
