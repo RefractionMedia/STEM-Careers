@@ -3,6 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="STEM_Careers.Views.JobsPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="JobTemplate">
+                <ViewCell Tapped="OnItemSelected">
+                    <Grid RowSpacing="0"
+                          ColumnSpacing="2"
+                          Margin="5"
+                          Padding="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"
+                               Grid.Column="0"
+                               Style="{StaticResource TitleListLabel}"
+                               Text="{Binding Name}"
+                               LineBreakMode="WordWrap" />
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               FontAttributes="Italic"
+                               FontSize="Medium"
+                               Style="{StaticResource DetailsLabel}"
+                               Text="{Binding MedianSalary}"
+                               LineBreakMode="WordWrap" />
+                        <Image Grid.Column="1"
+                               Grid.Row="0"
+                               Grid.RowSpan="2"
+                               HeightRequest="40"
+                               WidthRequest="40"
+                               HorizontalOptions="End"
+                               VerticalOptions="Start"
+                               Source="gold_star_full.png"
+                               Aspect="AspectFit">
+                            <Image.Triggers>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding IsFavorite}"
+                                             Value="True">
+                                    <Setter Property="Source"
+                                            Value="gold_star_full.png" />
+                                </DataTrigger>
+                                <DataTrigger TargetType="Image"
+                                             Binding="{Binding IsFavorite}"
+                                             Value="False">
+                                    <Setter Property="Source"
+                                            Value="gold_star_empty.png" />
+                                </DataTrigger>
+                            </Image.Triggers>
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="StarTapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Sorry, nothing seems to match your selection.."
@@ -21,40 +81,10 @@
             <ListView x:Name="JobListView"
                       ItemsSource="{Binding Jobs}"
                       VerticalOptions="FillAndExpand"
+                      ItemTemplate="{StaticResource JobTemplate}"
                       HasUnevenRows="true"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       CachingStrategy="RecycleElement">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell Tapped="ItemSelected">
-                            <StackLayout Padding="10" Orientation="Horizontal">
-                                <Label Text="{Binding Name}"
-                                       Style="{StaticResource TitleLabel}" />
-                                <Image HorizontalOptions="EndAndExpand"
-                                       Source="gold_star_full.png"
-                                       Aspect="AspectFit">
-                                    <Image.Triggers>
-                                        <DataTrigger TargetType="Image"
-                                                     Binding="{Binding IsFavorite}"
-                                                     Value="True">
-                                            <Setter Property="Source"
-                                                    Value="gold_star_full.png" />
-                                        </DataTrigger>
-                                        <DataTrigger TargetType="Image"
-                                                     Binding="{Binding IsFavorite}"
-                                                     Value="False">
-                                            <Setter Property="Source"
-                                                    Value="gold_star_empty.png" />
-                                        </DataTrigger>
-                                    </Image.Triggers>
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="StarTapped" />
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </ContentPage.Content>

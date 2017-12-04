@@ -1,5 +1,6 @@
 ﻿using STEM_Careers.Models;
 using STEM_Careers.ViewModels;
+using STEM_Careers.Views.Controls;
 using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -10,8 +11,7 @@ namespace STEM_Careers.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PeoplePage : ContentPage
     {
-        PeoplePageViewModel vm;
-
+        PeoplePageViewModel vm;        
         public PeoplePage(string field = "", string X = "")
         {
             InitializeComponent();
@@ -28,7 +28,6 @@ namespace STEM_Careers.Views
             title += X == "" ? "Any" : X;
             Title = title;
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -47,7 +46,7 @@ namespace STEM_Careers.Views
             }
         }
 
-        private async Task ItemSelected(object sender, EventArgs e)
+        private async Task OnItemSelected(object sender, EventArgs e)
         {
             var vc = sender as ViewCell;
             var parent = vc.Parent;

@@ -39,7 +39,7 @@ namespace STEM_Careers.Views
         {
             Navigation.PopAsync();
         }
-        private async Task ItemSelected(object sender, EventArgs e)
+        private async Task OnItemSelected(object sender, EventArgs e)
         {
             var vc = sender as ViewCell;
             var parent = vc.Parent;

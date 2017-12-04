@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="STEM_Careers.App">
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="STEM_Careers.App"
+             xmlns:controls="clr-namespace:STEM_Careers.Views.Controls">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#0099CC</Color>
@@ -22,6 +25,7 @@
                 <Setter Property="BarTextColor"
                         Value="White" />
             </Style>
+
             <Style x:Key="TitleLabel"
                    TargetType="Label">
                 <Setter Property="FontSize"
@@ -49,11 +53,28 @@
                         Value="{StaticResource MonochromaticDarkest}" />
             </Style>
 
+            <Style x:Key="TitleListLabel"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="Medium" />
+                <Setter Property="FontAttributes"
+                        Value="Bold" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource MonochromaticDarkest}" />
+            </Style>
+            <Style x:Key="SmallTextLabel"
+                   TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="Small" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource MonochromaticDarkest}" />
+            </Style>
+
             <Style x:Key="ButtonDefault"
                    TargetType="Button">
                 <Setter Property="Margin"
                         Value="2,2" />
-                
+
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource Primary}" />
                 <Setter Property="TextColor"
@@ -98,6 +119,8 @@
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
+
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -5,21 +5,28 @@
              Title="{Binding Name}">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Margin="10">
-                <StackLayout Orientation="Horizontal"
-                            >
-                    <Image Source="{Binding ImgReference}"
-                           Aspect="AspectFit"
-                           HorizontalOptions="StartAndExpand" />
-                    <StackLayout Orientation="Vertical">
-                        <Label Text="{Binding Title}"
-                               Style="{StaticResource TitleLabel}" />
-                        <Label Text="{Binding Description}"
-                               Style="{StaticResource DetailsLabel}" />
-                    </StackLayout>
+            <StackLayout Spacing="0"
+                         Margin="0"
+                         Padding="0"
+                         BackgroundColor="{StaticResource SplitComplementSooth}">
+                <Image Source="{Binding ImgReference}"
+                       MinimumHeightRequest="300"
+                       MinimumWidthRequest="300"
+                       HeightRequest="400"
+                       WidthRequest="600"
+                       Aspect="AspectFill"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="FillAndExpand" />
+                <StackLayout Margin="3"
+                             Padding="7"
+                             BackgroundColor="White">
+                    <Label Text="{Binding Title}"
+                           Style="{StaticResource TitleLabel}" />
+                    <Label Text="{Binding Description}"
+                           Style="{StaticResource DetailsLabel}" />
+                    <Label Text="{Binding Content}"
+                           Style="{StaticResource ClearTextLabel}" />
                 </StackLayout>
-                <Label Text="{Binding Content}"
-                       Style="{StaticResource ClearTextLabel}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
