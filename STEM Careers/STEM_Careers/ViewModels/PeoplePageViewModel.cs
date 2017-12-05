@@ -3,6 +3,7 @@ using STEM_Careers.Models;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Linq;
+using STEM_Careers.Views;
 
 namespace STEM_Careers.ViewModels
 {
@@ -35,6 +36,13 @@ namespace STEM_Careers.ViewModels
             Peeps = new ObservableRangeCollection<People>();
             AddPersonSubscribe();
             Helper = new PeopleHelper();
+            MessagingCenter.Subscribe<PeoplePickPage, string>(this, "STEMPickers", async (obj, concat) =>
+            {
+                string[] args = concat.Split(',');
+                this.field = args[0];
+                this.X = args[1];
+                await Initialize();
+            });
         }
 
         private void AddPersonSubscribe()
@@ -53,6 +61,7 @@ namespace STEM_Careers.ViewModels
         public async Task Initialize()
         {
             IsBusy = true;
+            Peeps.Clear();
             PeopleHelper helper = new PeopleHelper();
             Peeps.AddRange(await helper.GetPeople(this.field, this.X).ContinueWith(t =>
             {

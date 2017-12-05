@@ -17,21 +17,18 @@
                        FontAttributes="Bold" />
                 <Picker x:Name="subjectPicker"
                         Title="Choose a Discipline"
-                        SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding Fields}">
                 </Picker>
                 <Label Text="+"
                        Style="{StaticResource PlusLabel}" />
                 <Picker x:Name="XPicker"
                         Title="Select your X Factor"
-                        SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding YourX}">
                 </Picker>
                 <Label Text="+"
                        Style="{StaticResource PlusLabel}" />
                 <Picker x:Name="regionPicker"
                         Title="Select a State"
-                        SelectedIndexChanged="IndexChanged"
                         ItemsSource="{Binding States}" />
                 <Button Margin="0,10,0,0"
                         Text="Search"

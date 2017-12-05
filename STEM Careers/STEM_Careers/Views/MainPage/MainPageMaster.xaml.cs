@@ -34,9 +34,9 @@ namespace STEM_Careers.Views.MainPage
                 MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
                 {
                     new MainPageMenuItem { Id = 0, Title = "Home" , TargetType=typeof(HomePage)},
-                    new MainPageMenuItem { Id = 1, Title = "Degrees" , TargetType=typeof(DegreeSearchPage)},
-                    new MainPageMenuItem { Id = 2, Title = "People" , TargetType=typeof(PeoplePickPage)},
-                    new MainPageMenuItem { Id = 3, Title = "Jobs" , TargetType=typeof(JobPickPage)},
+                    new MainPageMenuItem { Id = 1, Title = "Degrees" , TargetType=typeof(DegreePage)},
+                    new MainPageMenuItem { Id = 2, Title = "People" , TargetType=typeof(PeoplePage)},
+                    new MainPageMenuItem { Id = 3, Title = "Jobs" , TargetType=typeof(JobsPage)},
                     new MainPageMenuItem { Id = 4, Title = "Favorites", TargetType=typeof(FavoritePage) },
                     new MainPageMenuItem { Id = 5, Title = "About", TargetType=typeof(AboutPage) },
                 });

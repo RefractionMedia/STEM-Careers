@@ -12,17 +12,21 @@ namespace STEM_Careers.Views
     public partial class JobsPage : ContentPage
     {
         JobsViewModel vm;
+        STEMPickerViewModel PickerVM;
 
+        public JobsPage()
+        {
+            InitializeComponent();
+            BindingContext = vm = new JobsViewModel();
+            Title = "Jobs";
+            PickerVM = new STEMPickerViewModel();
+        }
         public JobsPage(string field = "", string X = "")
         {
             InitializeComponent();
             BindingContext = vm = new JobsViewModel(field, X);
-
-            string title = "Jobs: ";
-            title += field == "" ? "Any" : field;
-            title += " + ";
-            title += X == "" ? "Any" : X;
-            Title = title;
+            Title = "Jobs";
+            PickerVM = new STEMPickerViewModel();
         }
 
         protected async override void OnAppearing()
@@ -32,6 +36,20 @@ namespace STEM_Careers.Views
             await vm.Initialize();
             InitializeComponent();
             BindingContext = vm;
+            ToolbarItem stemPickers = new ToolbarItem
+            {
+                Text = "Filter",
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(async () =>
+                {
+                    await Navigation.PushModalAsync(new JobPickPage(PickerVM), true);
+                })
+            };
+            if (ToolbarItems.Count > 0)
+            {
+                ToolbarItems.RemoveAt(0);
+            }
+            ToolbarItems.Add(stemPickers);
             base.OnAppearing();
         }
 

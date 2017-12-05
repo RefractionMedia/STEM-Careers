@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using STEM_Careers.Data;
 using System.Windows.Input;
+using STEM_Careers.Views;
 
 namespace STEM_Careers.ViewModels
 {
@@ -31,24 +32,23 @@ namespace STEM_Careers.ViewModels
             this.field = field;
             this.state = state;
             this.X = X;
-            string title = "Degrees: ";
-            title += field == "" ? "Any" : field;
-            title += " + ";
-            title += X == "" ? "Any" : X;
-            title += " + ";
-            title += state == "" ? "Any" : state;
-            Title = title;
+            Title = "Degrees";
             Degrees = new ObservableRangeCollection<Grouping<string, Degree>>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(field, X, state));
+            MessagingCenter.Subscribe<DegreeSearchPage, string>(this, "STEMPickers", async (obj, concat) =>
+            {
+                string[] args = concat.Split(',');
+                await ExecuteLoadItemsCommand(args[0], args[1], args[2]);
+            });
         }
-        
+
         public async Task Initialize()
         {
-            if(Degrees.Count< 2)
+            if (Degrees.Count < 2)
                 await ExecuteLoadItemsCommand(field, X, state);
         }
 
-        async Task ExecuteLoadItemsCommand(string field = "", string X = "", string state = "")
+        public async Task ExecuteLoadItemsCommand(string field = "", string X = "", string state = "")
         {
             if (IsBusy)
                 return;
@@ -67,10 +67,11 @@ namespace STEM_Careers.ViewModels
                     into grouped
                     select new Grouping<string, Degree>(grouped.Key, grouped);
 
-                if(items.Count == 0)
-                {
+                if (items.Count == 0)
                     NoResults = true;
-                }
+                else
+                    NoResults = false;
+
 
                 Degrees.ReplaceRange(sorted);
             }

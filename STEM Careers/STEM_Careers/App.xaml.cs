@@ -10,11 +10,6 @@ namespace STEM_Careers
 {
     public partial class App : Application
     {
-        public static bool UseMock
-            
-            = false;
-        public static string AzureMobileAppUrl = "https://[CONFIGURE-THIS-URL].azurewebsites.net";
-
         //Database 
         static Database database;
         public static Database Database

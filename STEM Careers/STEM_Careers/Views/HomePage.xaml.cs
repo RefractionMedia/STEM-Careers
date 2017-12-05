@@ -15,12 +15,12 @@ namespace STEM_Careers.Views
 
         private void DegreePicker(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new DegreeSearchPage());
+            Navigation.PushAsync(new DegreePage());
         }
 
         private void CareerInspo(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new JobPickPage());
+            Navigation.PushAsync(new JobsPage());
         }
 
         private void Featured(object sender, System.EventArgs e)
@@ -30,7 +30,7 @@ namespace STEM_Careers.Views
 
         private void People(object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new PeoplePickPage());
+            Navigation.PushAsync(new PeoplePage());
         }
 
         private void Favorites(object sender, System.EventArgs e)

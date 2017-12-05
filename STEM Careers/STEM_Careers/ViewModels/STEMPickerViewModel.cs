@@ -7,7 +7,7 @@ using Xamarin.Forms;
 
 namespace STEM_Careers.ViewModels
 {
-    class STEMPickerViewModel : BaseViewModel
+    public class STEMPickerViewModel : BaseViewModel
     {
         public Command LoadItemsCommand { get; set; }
 
@@ -25,17 +25,27 @@ namespace STEM_Careers.ViewModels
             set { SetProperty(ref yourX, value); }
         }
 
+        public int XPickerIndex { get; internal set; }
+        public int FieldPickerIndex { get; internal set; }
+        public bool Initialized { get; private set; }
+
         public STEMPickerViewModel()
         {
             Title = "Find your path";
             Fields = new List<string>();
             YourX = new List<string>();
+            XPickerIndex = -1;
+            FieldPickerIndex = -1;
+            Initialized = false;
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
         }
 
         public async Task Initialize()
         {
-            await ExecuteLoadItemsCommand();
+            if (Initialized)
+                return;
+            else
+                await ExecuteLoadItemsCommand();
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -54,7 +64,7 @@ namespace STEM_Careers.ViewModels
                 YourX = res.Pop();
                 YourX.Sort();
                 YourX.Insert(0, "Any");
-                
+
             }
             catch (Exception ex)
             {
@@ -68,6 +78,7 @@ namespace STEM_Careers.ViewModels
             }
             finally
             {
+                Initialized = true;
                 IsBusy = false;
             }
         }

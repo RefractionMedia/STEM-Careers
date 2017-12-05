@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using System.Linq;
 using System.Collections.Generic;
+using STEM_Careers.Views;
 
 namespace STEM_Careers.ViewModels
 {
@@ -32,6 +33,11 @@ namespace STEM_Careers.ViewModels
             Title = "Jobs";
             Jobs = new ObservableRangeCollection<Job>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(field, X));
+            MessagingCenter.Subscribe<JobPickPage, string>(this, "STEMPickers", async (obj, concat) =>
+            {
+                string[] args = concat.Split(',');
+                await ExecuteLoadItemsCommand(args[0], args[1]);
+            });
         }
 
 

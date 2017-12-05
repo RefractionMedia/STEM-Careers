@@ -1,5 +1,5 @@
 ﻿using STEM_Careers.ViewModels;
-
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,44 +9,34 @@ namespace STEM_Careers.Views
 	public partial class JobPickPage : ContentPage
 	{
         private STEMPickerViewModel vm;
-        public JobPickPage ()
+        public JobPickPage (STEMPickerViewModel vm)
 		{
             InitializeComponent();
             if (vm == null)
-                vm = new STEMPickerViewModel();
+                this.vm = new STEMPickerViewModel();
+            else
+                this.vm = vm;
             vm.Initialize();
             BindingContext = vm;
 
             // Leaving the selected pickers as they were previously
-            App app = Application.Current as App;
-            XPicker.SelectedIndex = app.XPickerIndex;
-            subjectPicker.SelectedIndex = app.FieldPickerIndex;
+            XPicker.SelectedIndex = vm.XPickerIndex;
+            subjectPicker.SelectedIndex = vm.FieldPickerIndex;
         }
 
-    
-
-
-        private void FindPath(object sender, System.EventArgs e)
+        private async Task FindPath(object sender, System.EventArgs e)
         {
-            //A tedious double if/else, lovely. Also if it's -1, it means not selected
             string field = subjectPicker.SelectedIndex == -1 ? "Any" : subjectPicker.SelectedItem.ToString();
             string X = XPicker.SelectedIndex == -1 ? "Any" : XPicker.SelectedItem.ToString();
 
-            Navigation.PushAsync(new JobsPage(field == "Any" ? "" : field, X == "Any" ? "" : X));
-        }
+            string concat = string.Concat(field, ",", X);
 
-        private void IndexChanged(object sender, System.EventArgs e)
-        {
-            App app = Application.Current as App;
-            if (sender is Picker)
-            {
-                Picker picker = sender as Picker;
-                if (picker.SelectedIndex != -1)
-                {
-                    app.XPickerIndex = XPicker.SelectedIndex;
-                    app.FieldPickerIndex = subjectPicker.SelectedIndex;
-                }
-            }
+            //save picker positions
+            vm.XPickerIndex = XPicker.SelectedIndex;
+            vm.FieldPickerIndex = subjectPicker.SelectedIndex;
+
+            await Navigation.PopModalAsync();
+            MessagingCenter.Send<JobPickPage, string>(this, "STEMPickers", concat);
         }
     }
 }

@@ -11,7 +11,20 @@ namespace STEM_Careers.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PeoplePage : ContentPage
     {
-        PeoplePageViewModel vm;        
+        STEMPickerViewModel PickerVM;
+        PeoplePageViewModel vm;
+        public PeoplePage()
+        {
+            InitializeComponent();
+            if (vm == null)
+            {
+                vm = new PeoplePageViewModel();
+            }
+            BindingContext = vm;
+            vm.Initialize();
+            Title = "People";
+            PickerVM = new STEMPickerViewModel();
+        }
         public PeoplePage(string field = "", string X = "")
         {
             InitializeComponent();
@@ -21,15 +34,25 @@ namespace STEM_Careers.Views
             }
             BindingContext = vm;
             vm.Initialize();
-
-            string title = "People: ";
-            title = field == "" ? "Any" : field;
-            title += "\n+\n";
-            title += X == "" ? "Any" : X;
-            Title = title;
+            Title = "People";
+            PickerVM = new STEMPickerViewModel();
         }
         protected override void OnAppearing()
         {
+            ToolbarItem stemPickers = new ToolbarItem
+            {
+                Text = "Filter",
+                Order = ToolbarItemOrder.Primary,
+                Command = new Command(async () =>
+                {
+                    await Navigation.PushModalAsync(new PeoplePickPage(PickerVM), true);
+                })
+            };
+            if (ToolbarItems.Count > 0)
+            {
+                ToolbarItems.RemoveAt(0);
+            }
+            ToolbarItems.Add(stemPickers);
             base.OnAppearing();
         }
 
