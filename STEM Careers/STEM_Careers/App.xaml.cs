@@ -99,7 +99,10 @@ namespace STEM_Careers
         {
             InitializeComponent();
             Api.GetCategories();
-            MainPage = new LoadingPage();
+            if (!Database.IsInitialized())
+                MainPage = new LoadingPage();
+            else
+                MainPage = new Views.MainPage.MainPage();
             InitializePickers();
             CrossConnectivity.Current.ConnectivityChanged += (sender, args) =>
             {

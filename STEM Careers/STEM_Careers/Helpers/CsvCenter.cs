@@ -9,14 +9,23 @@ using System.Threading.Tasks;
 
 namespace STEM_Careers.Helpers
 {
+    /// <summary>
+    /// The class that fetches 
+    /// </summary>
     class CsvCenter
     {
-
+        //Links to CSVs online
         static readonly string UniversityRankingCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6gv1dYQLy6RmQnC3WgQBRzmmJVgG65FeIVX65pA8gc1rN0bzmneNrv3UPlV1vtSsST2l0MDjIEnaC/pub?output=csv";
         static readonly string DegreeFinderCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR6F5zziuTvzOR2b6032jBCNGp0LTf_a1L2hMxi000afILLr90atnytTNhyRgAec2yzQ3ht9SLLUsJ3/pub?output=csv";
         static readonly string JobListCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSOkra4mxnp_E0RGSVbdf923UYLTqtbqnlv4Ob2kPP1jpJ9qn4fGWL4sy5NywRHcHoAZpVgYwOm0EyC/pub?output=csv";
         static readonly string JobsDescriptionsCSVLink = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSKzU-TIFvaSEIjMQUky556BIMtNeJX53oQRgN8E8-aSIQr0Hnl6Qut0078xd7F29aAEQFqJZ-kJeTI/pub?output=csv";
 
+
+        /// <summary>
+        /// Very dodgy way to retrieve jobs from 2 different CSVs
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public async Task<bool> JobList(SQLiteAsyncConnection db)
         {
             List<Job> Jobs = new List<Job>();
@@ -90,6 +99,11 @@ namespace STEM_Careers.Helpers
             return true;
         }
 
+        /// <summary>
+        /// Used by JobList method to get descriptions in 2nd CSV
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public async Task<bool> JobDescription(SQLiteAsyncConnection db)
         {
             StreamReader reader = null;
@@ -136,6 +150,11 @@ namespace STEM_Careers.Helpers
             return true;
         }
 
+        /// <summary>
+        /// Gets Uni ranks from CSV online
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public async Task<bool> UniRankInit(SQLiteAsyncConnection db)
         {
             List<University> Unis = new List<University>();
@@ -166,6 +185,12 @@ namespace STEM_Careers.Helpers
             return true;
         }
 
+
+        /// <summary>
+        /// Parses Deg
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
         public async Task<bool> DegreeFinderInit(SQLiteAsyncConnection db)
         {
             List<Degree> Degrees = new List<Degree>();
@@ -205,7 +230,7 @@ namespace STEM_Careers.Helpers
                 degree.LinkToWebsite = csv.GetField<string>(6);
 
 
-                //Making sure the state names are all uppercase (except New Zealand) and similar 
+                //Making sure the state names are all uppercase (except New Zealand)
                 string tmp = csv.GetField<string>(1);
                 if (tmp.Contains("VIC, QLD"))
                 {

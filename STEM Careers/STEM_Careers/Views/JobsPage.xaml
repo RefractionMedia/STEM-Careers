@@ -38,7 +38,7 @@
                                WidthRequest="40"
                                HorizontalOptions="End"
                                VerticalOptions="Start"
-                               Source="gold_star_full.png"
+                               Source="gold_star_empty.png"
                                Aspect="AspectFit">
                             <Image.Triggers>
                                 <DataTrigger TargetType="Image"

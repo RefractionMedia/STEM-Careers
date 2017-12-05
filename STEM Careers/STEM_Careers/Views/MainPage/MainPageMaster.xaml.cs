@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -35,8 +29,8 @@ namespace STEM_Careers.Views.MainPage
                 {
                     new MainPageMenuItem { Id = 0, Title = "Home" , TargetType=typeof(HomePage)},
                     new MainPageMenuItem { Id = 1, Title = "Degrees" , TargetType=typeof(DegreePage)},
-                    new MainPageMenuItem { Id = 2, Title = "People" , TargetType=typeof(PeoplePage)},
-                    new MainPageMenuItem { Id = 3, Title = "Jobs" , TargetType=typeof(JobsPage)},
+                    new MainPageMenuItem { Id = 2, Title = "Jobs" , TargetType=typeof(JobsPage)},
+                    new MainPageMenuItem { Id = 3, Title = "People" , TargetType=typeof(PeoplePage)},
                     new MainPageMenuItem { Id = 4, Title = "Favorites", TargetType=typeof(FavoritePage) },
                     new MainPageMenuItem { Id = 5, Title = "About", TargetType=typeof(AboutPage) },
                 });

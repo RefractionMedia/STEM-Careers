@@ -4,6 +4,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 
@@ -11,7 +12,7 @@ namespace STEM_Careers.Data
 {
 
     ///<summary>
-    ///The database for all files fetched from the web
+    ///The database for all files fetched from the web (degrees and jobs)
     /// </summary>
     public class Database
     {
@@ -58,6 +59,8 @@ namespace STEM_Careers.Data
                 IsInitializing = false;
                 InitializeAsync();
             }
+
+            //Suscribe to an add person event, work is done at startup and everytime a people page is opened
             MessagingCenter.Subscribe<PeopleHelper, People>(this, "AddPerson", async (helper, person) =>
             {
                 try
@@ -103,6 +106,11 @@ namespace STEM_Careers.Data
             }
             try
             {
+                if (!App.HasInternetConnexion())
+                {
+                    IsInitializing = false;
+                    MessagingCenter.Send(this, "DatabaseInfo", "Initialization error");
+                }
                 await Task.Delay(500);
                 MessagingCenter.Send(this, "DatabaseInfo", "Initializing");
                 //Cleanup
@@ -151,11 +159,6 @@ namespace STEM_Careers.Data
                     //    MessagingCenter.Send(this, "DatabaseInfo", "UniTask Done");
                     return t.Result;
                 });
-                if (!App.HasInternetConnexion())
-                {
-                    IsInitializing = false;
-                    MessagingCenter.Send(this, "DatabaseInfo", "Initialization error");
-                }
             }
             catch (Exception e)
             {
@@ -199,13 +202,18 @@ namespace STEM_Careers.Data
             }
             return null;
         }
+
+        /// <summary>
+        /// Gets the picker data for degrees only
+        /// </summary>
+        /// <returns></returns>
         public async Task<Stack<List<string>>> GetPickerDataAsync()
         {
             List<Degree> databaseListed = await database.Table<Degree>().ToListAsync();
 
-            List<string> States = new List<string>();
-            List<string> Fields = new List<string>();
-            List<string> YourX = new List<string>();
+            HashSet<string> States = new HashSet<string>();
+            HashSet<string> Fields = new HashSet<string>();
+            HashSet<string> YourX = new HashSet<string>();
 
             foreach (var degree in databaseListed)
             {
@@ -213,22 +221,24 @@ namespace STEM_Careers.Data
                 {
                     States.Add(degree.State);
                 }
-                if (!Fields.Contains(degree.Field))
+                foreach (string str in degree.Field.Split(','))
                 {
-                    Fields.Add(degree.Field);
+                    if (!Fields.Contains(str.Trim()))
+                        Fields.Add(str.Trim());
                 }
-                if (!YourX.Contains(degree.YourX))
+                foreach (string str in degree.YourX.Split(','))
                 {
-                    YourX.Add(degree.YourX);
+                    if (!YourX.Contains(str.Trim()))
+                        YourX.Add(str.Trim());
                 }
             }
             Stack<List<string>> result = new Stack<List<string>>();
-            result.Push(States);
-            result.Push(YourX);
-            result.Push(Fields);
-
+            result.Push(States.ToList());
+            result.Push(YourX.ToList());
+            result.Push(Fields.ToList());
             return result;
         }
+
         public Task<List<Degree>> GetDegreesAsync()
         {
             return database.Table<Degree>().ToListAsync();
@@ -296,6 +306,10 @@ namespace STEM_Careers.Data
             return jobsListed;
         }
 
+        /// <summary>
+        /// This is used to build the pickers' data for people and jobs, not degrees
+        /// </summary>
+        /// <returns></returns>
         public async Task<Stack<List<string>>> GetSTEMPickerDataAsync()
         {
             List<Job> databaseListed = await database.Table<Job>().ToListAsync();

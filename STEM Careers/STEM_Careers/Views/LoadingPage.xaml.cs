@@ -55,7 +55,14 @@ namespace STEM_Careers.Views
                 }
             });
 
-            
+            if (App.Database.IsInitialized())
+            {
+                ProgressDouble = 1.0;
+                commentLabel.Text = "Let us begin";
+                AnimateToHomeScreen();
+            }
+
+
             MessagingCenter.Subscribe<Database, string>(this, "DatabaseInfo", (sender, str) =>
             {
                 if (!App.HasInternetConnexion() && !App.Database.IsInitialized())
@@ -99,12 +106,7 @@ namespace STEM_Careers.Views
                 }
             });
 
-            if (App.Database.IsInitialized())
-            {
-                ProgressDouble = 1.0;
-                commentLabel.Text = "Let us begin";
-                AnimateToHomeScreen();
-            }
+            
         }
 
 

@@ -215,6 +215,7 @@ namespace STEM_Careers.Helpers
 
 
         #region Updating helpers
+
         public async Task UpdatePeople(string field = "", string X = "")
         {
             if (await PeopleUpToDate())
@@ -223,6 +224,10 @@ namespace STEM_Careers.Helpers
             return;
         }
 
+        /// <summary>
+        /// Checks if the latest post on website is the same as the one in the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<bool> PeopleUpToDate()
         {
             //check if the newest article on website is the same as the newest one in the database
@@ -246,6 +251,7 @@ namespace STEM_Careers.Helpers
         }
         #endregion
         #region Category helpers
+
         /// <summary>
         /// Checks if str is part of categories (with name to slug conversion)
         /// </summary>
