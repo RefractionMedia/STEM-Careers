@@ -14,7 +14,7 @@ namespace STEM_Careers.Models
         public string Field { get; set; }
         public string Description { get; set; }
 
-        public bool IsFavorite { get; set; }
+        public bool IsFavorite { get; set; } = false;
 
         public int CompareTo(object obj)
         {

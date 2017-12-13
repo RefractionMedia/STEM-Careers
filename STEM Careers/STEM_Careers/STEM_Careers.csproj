@@ -40,11 +40,11 @@
     </Compile>
     <Compile Include="Converters\ClearTextFormater.cs" />
     <Compile Include="Converters\SearchQueryCreator.cs" />
+    <Compile Include="Converters\StarImagePathConverter.cs" />
     <Compile Include="Data\Database.cs" />
     <Compile Include="Data\Grouping.cs" />
     <Compile Include="Data\IFileHelper.cs" />
     <Compile Include="Helpers\CsvCenter.cs" />
-    <Compile Include="Helpers\CwSTEMapi.cs" />
     <Compile Include="Helpers\GeneralHelpers.cs" />
     <Compile Include="Helpers\MessengingCenterAlert.cs" />
     <Compile Include="Helpers\ObservableObject.cs" />
@@ -55,7 +55,6 @@
     <Compile Include="Models\Degree.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Models\People.cs" />
-    <Compile Include="Models\Story.cs" />
     <Compile Include="Models\University.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
@@ -63,7 +62,6 @@
     <Compile Include="ViewModels\DegreeDetailsViewModel.cs" />
     <Compile Include="ViewModels\DegreePageViewModel.cs" />
     <Compile Include="ViewModels\DegreeSearchViewModel.cs" />
-    <Compile Include="ViewModels\FeaturedStoriesViewModel.cs" />
     <Compile Include="ViewModels\JobsViewModel.cs" />
     <Compile Include="ViewModels\PeoplePageViewModel.cs" />
     <Compile Include="ViewModels\STEMPickerViewModel.cs" />
@@ -82,12 +80,6 @@
     </Compile>
     <Compile Include="Views\FavoritePage.xaml.cs">
       <DependentUpon>FavoritePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FeaturedStoriesPage.xaml.cs">
-      <DependentUpon>FeaturedStoriesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FeaturedStoriesPickerPage.xaml.cs">
-      <DependentUpon>FeaturedStoriesPickerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -226,14 +218,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\DegreeSearchPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\FeaturedStoriesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\FeaturedStoriesPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

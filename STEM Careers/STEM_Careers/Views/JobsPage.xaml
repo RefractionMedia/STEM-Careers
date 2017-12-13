@@ -2,9 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="STEM_Careers.Views.JobsPage"
+             xmlns:converters="clr-namespace:STEM_Careers.Converters"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:StarImagePathConverter x:Key="imgPathConverter"></converters:StarImagePathConverter>
             <DataTemplate x:Key="JobTemplate">
                 <ViewCell Tapped="OnItemSelected">
                     <Grid RowSpacing="0"

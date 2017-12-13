@@ -23,11 +23,6 @@ namespace STEM_Careers.Views
             Navigation.PushAsync(new JobsPage());
         }
 
-        private void Featured(object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new FeaturedStoriesPickerPage());
-        }
-
         private void People(object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new PeoplePage());

@@ -25,20 +25,6 @@ namespace STEM_Careers
             set { }
         }
 
-        static CwSTEMapi api;
-        public static CwSTEMapi Api
-        {
-            get
-            {
-                if (api == null)
-                {
-                    api = new CwSTEMapi();
-                }
-                return api;
-            }
-            set { }
-        }
-
         static internal PeopleHelper webHelper = new PeopleHelper();
 
         #region PickerIndexes Functions and variables
@@ -98,7 +84,6 @@ namespace STEM_Careers
         public App()
         {
             InitializeComponent();
-            Api.GetCategories();
             if (!Database.IsInitialized())
                 MainPage = new LoadingPage();
             else

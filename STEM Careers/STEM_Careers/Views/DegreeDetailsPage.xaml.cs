@@ -27,10 +27,6 @@ namespace STEM_Careers.Views
             InitializeComponent();
             BindingContext = this.vm = vim;
             linkButton.Text = "Go to website (google search)";
-            //if (vm.Degree.LinkToWebsite == "")
-            //{
-            //    linkButton.Text = "No link, google search ?";
-            //}
         }
 
         protected async override void OnAppearing()

@@ -16,7 +16,7 @@ namespace STEM_Careers.Models
         public string Description { get; set; }
         public string Content { get; set; }
 
-        public bool IsFavorite { get; set; }
+        public bool IsFavorite { get; set; } = false;
     }
 
     class PeopleComparer : Comparer<People>

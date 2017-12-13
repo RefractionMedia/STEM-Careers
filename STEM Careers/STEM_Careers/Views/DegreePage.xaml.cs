@@ -13,7 +13,7 @@ namespace STEM_Careers.Views
         DegreePageViewModel vm;
         DegreeSearchViewModel PickerVM;
 
-        //Default ctor for 
+        //Default ctor for sidebars
         public DegreePage()
         {
             InitializeComponent();
@@ -33,12 +33,17 @@ namespace STEM_Careers.Views
             Navigation.PopAsync();
         }
 
+        protected override void OnBindingContextChanged()
+        {
+
+            base.OnBindingContextChanged();
+        }
+
         protected async override void OnAppearing()
         {
             if (vm == null)
                 vm = new DegreePageViewModel();
             BindingContext = vm;
-            InitializeComponent();
             ToolbarItem stemPickers = new ToolbarItem
             {
                 Text = "Filter",
@@ -54,6 +59,7 @@ namespace STEM_Careers.Views
             }
             ToolbarItems.Add(stemPickers);
             await vm.Initialize();
+            InitializeComponent();
             base.OnAppearing();
         }
 

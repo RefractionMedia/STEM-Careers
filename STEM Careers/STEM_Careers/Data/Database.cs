@@ -26,7 +26,6 @@ namespace STEM_Careers.Data
 
         public bool IsInitializing { get; private set; }
 
-
         public Database(string dbPath)
         {
             database = new SQLiteAsyncConnection(dbPath);
@@ -223,13 +222,15 @@ namespace STEM_Careers.Data
                 }
                 foreach (string str in degree.Field.Split(','))
                 {
-                    if (!Fields.Contains(str.Trim()))
-                        Fields.Add(str.Trim());
+                    var tmp = str.Trim();
+                    if (!Fields.Contains(tmp) && !string.IsNullOrWhiteSpace(tmp))
+                        Fields.Add(tmp);
                 }
                 foreach (string str in degree.YourX.Split(','))
                 {
-                    if (!YourX.Contains(str.Trim()))
-                        YourX.Add(str.Trim());
+                    var tmp = str.Trim();
+                    if (!YourX.Contains(tmp) && !string.IsNullOrWhiteSpace(tmp))
+                        YourX.Add(tmp);
                 }
             }
             Stack<List<string>> result = new Stack<List<string>>();

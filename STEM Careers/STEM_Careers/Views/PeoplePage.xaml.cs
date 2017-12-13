@@ -5,6 +5,7 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Runtime.CompilerServices;
 
 namespace STEM_Careers.Views
 {
