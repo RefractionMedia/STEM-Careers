@@ -88,7 +88,7 @@
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       HasUnevenRows="True"
                       IsGroupingEnabled="True"
-                      GroupShortNameBinding="{Binding Degrees.Key}"
+                      GroupShortNameBinding=""
                       GroupHeaderTemplate="{StaticResource GroupingTemplate}"
                       CachingStrategy="RecycleElement">
             </ListView>

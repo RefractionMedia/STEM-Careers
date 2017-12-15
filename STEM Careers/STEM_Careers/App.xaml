@@ -2,7 +2,8 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="STEM_Careers.App"
-             xmlns:controls="clr-namespace:STEM_Careers.Views.Controls">
+             xmlns:controls="clr-namespace:STEM_Careers.Views.Controls"
+             xmlns:converters="clr-namespace:STEM_Careers.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#0099CC</Color>
@@ -114,7 +115,7 @@
                     <StackLayout VerticalOptions="FillAndExpand"
                                  Padding="10"
                                  BackgroundColor="{StaticResource MonochromaticDarker}">
-                        <Label Text="{Binding Key}"
+                        <Label Text="{Binding Key, Converter={StaticResource PreventNullStrings}}"
                                TextColor="White"
                                FontSize="Medium"
                                VerticalOptions="Center" />
@@ -122,6 +123,8 @@
                 </ViewCell>
             </DataTemplate>
 
+            <converters:PreventNullStringsConverter x:Key="PreventNullStrings">
+            </converters:PreventNullStringsConverter>
             
         </ResourceDictionary>
     </Application.Resources>

@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ClearTextFormater.cs" />
+    <Compile Include="Converters\PreventNullStringsConverter.cs" />
     <Compile Include="Converters\SearchQueryCreator.cs" />
     <Compile Include="Converters\StarImagePathConverter.cs" />
     <Compile Include="Data\Database.cs" />

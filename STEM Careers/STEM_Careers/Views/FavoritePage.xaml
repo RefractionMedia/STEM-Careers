@@ -206,7 +206,7 @@
                       ItemTemplate="{StaticResource favoritesTemplateSelector}"
                       HasUnevenRows="True"
                       IsGroupingEnabled="True"
-                      GroupShortNameBinding="{Binding Favorites.Key}"
+                      GroupShortNameBinding=""
                       GroupHeaderTemplate="{StaticResource GroupingTemplate}"
                       CachingStrategy="RecycleElement">
             </ListView>

@@ -33,12 +33,6 @@ namespace STEM_Careers.Views
             Navigation.PopAsync();
         }
 
-        protected override void OnBindingContextChanged()
-        {
-
-            base.OnBindingContextChanged();
-        }
-
         protected async override void OnAppearing()
         {
             if (vm == null)

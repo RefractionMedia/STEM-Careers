@@ -71,8 +71,6 @@ namespace STEM_Careers.ViewModels
                     NoResults = true;
                 else
                     NoResults = false;
-
-
                 Degrees.ReplaceRange(sorted);
             }
             catch (Exception ex)
